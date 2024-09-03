@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
             $user = Auth::user();
 
             if (in_array($user->rol_id, [1, 2])) {
-                return redirect()->intended('/dashboard');
+                return redirect()->route('filament.admin.pages.dashboard');
             } else {
                 return redirect()->intended('/userpage');
             }
