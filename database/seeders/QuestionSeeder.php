@@ -17,6 +17,7 @@ class QuestionSeeder extends Seeder
         $question = new \App\Models\Question();
         $question->question = 'What is the difference between == and ===?';
         $question->category_id = rand(1, count($categories));
+        $question->created_by = 1;
         $question->save();
 
         $faker = Fake('nl_NL');
@@ -24,6 +25,7 @@ class QuestionSeeder extends Seeder
             $question = new \App\Models\Question();
             $question->question = $faker->sentence();
             $question->category_id = rand(1, count($categories));
+            $question->created_by = 1;
             $question->save();
         }
     }

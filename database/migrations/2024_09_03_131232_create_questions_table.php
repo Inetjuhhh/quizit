@@ -12,10 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table->id();
-            $table->string('question');
-            $table->foreignId('category_id')->nullable()->constrained();
-            $table->timestamps();
+            $table  ->id();
+            $table  ->foreignId('category_id')
+                    ->references('id')
+                    ->on('categories')
+                    ->nullable()
+                    ->constrained();
+            $table  ->foreignId('created_by')
+                    ->references('id')
+                    ->on('users')
+                    ->constrained();
+            $table  ->string('question');
+            $table  ->timestamps();
         });
     }
 
