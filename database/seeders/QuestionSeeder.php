@@ -21,11 +21,12 @@ class QuestionSeeder extends Seeder
         $question->save();
 
         $faker = Fake('nl_NL');
+        $users = \App\Models\User::all();
         for ($i = 0; $i < 10; $i++) {
             $question = new \App\Models\Question();
             $question->question = $faker->sentence();
             $question->category_id = rand(1, count($categories));
-            $question->created_by = 1;
+            $question->created_by = rand(1, (count($users)-1));
             $question->save();
         }
     }
