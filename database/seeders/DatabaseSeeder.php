@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             RolSeeder::class,
             UserSeeder::class,
             CategorySeeder::class,
+            TypeSeeder::class,
             QuestionSeeder::class,
             AnswerSeeder::class,
         ]);

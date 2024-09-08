@@ -6,6 +6,7 @@ use App\Filament\Admin\Resources\QuestionResource\Pages;
 use App\Filament\Admin\Resources\QuestionResource\RelationManagers;
 use App\Models\Category;
 use App\Models\Question;
+use App\Models\Type;
 use Faker\Core\Number;
 use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
@@ -20,6 +21,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use NunoMaduro\Collision\Adapters\Phpunit\State;
 
 class QuestionResource extends Resource
 {
@@ -38,14 +40,9 @@ class QuestionResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('question')
-                    ->label('Vraag')
-                    ->columnSpanFull()
-                    ->required(),
                 Select::make('category_id')
                     ->label('Categorie')
                     ->relationship('category', 'name')
-                    ->columnSpanFull()
                     ->preload()
                     ->live()
                     ->options(
@@ -57,6 +54,30 @@ class QuestionResource extends Resource
                             ->required(),
                     ])
                     ->required(),
+                Select::make('type_id')
+                    ->label('Type vraag')
+                    ->relationship('type', 'name')
+                    ->live()
+                    ->options(
+                        Type::all()->pluck('type', 'id')
+                    )
+                    ->required(),
+
+                TextInput::make('question')
+                    ->label('Vraag')
+                    ->columnSpanFull()
+                    ->required(),
+
+                TextInput::make('answer')
+                    ->label('Antwoord')
+                    ->columnSpanFull()
+                    ->visible(function ($record, Get $get) {
+                        if($get('type_id') == 1) {
+                            return true;
+                        }
+                })
+                ->required(),
+
                 Hidden::make('created_by')
                     ->default(function() {
                         $user = auth()->user();

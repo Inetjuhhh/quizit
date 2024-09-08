@@ -18,6 +18,7 @@ return new class extends Migration
                     ->on('categories')
                     ->nullable()
                     ->constrained();
+            $table  ->foreignId('type_id');
             $table  ->foreignId('created_by')
                     ->references('id')
                     ->on('users')
