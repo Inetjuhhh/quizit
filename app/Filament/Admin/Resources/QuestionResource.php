@@ -68,15 +68,15 @@ class QuestionResource extends Resource
                     ->columnSpanFull()
                     ->required(),
 
-                TextInput::make('answer')
-                    ->label('Antwoord')
-                    ->columnSpanFull()
-                    ->visible(function ($record, Get $get) {
-                        if($get('type_id') == 1) {
-                            return true;
-                        }
-                })
-                ->required(),
+                // TextInput::make('answer')
+                //     ->label('Antwoord')
+                //     ->columnSpanFull()
+                //     ->visible(function ($record, Get $get) {
+                //         if($get('type_id') == 1) {
+                //             return true;
+                //         }
+                // })
+                // ->required(),
 
                 Hidden::make('created_by')
                     ->default(function() {
