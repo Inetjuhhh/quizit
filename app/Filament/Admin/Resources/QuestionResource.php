@@ -6,10 +6,15 @@ use App\Filament\Admin\Resources\QuestionResource\Pages;
 use App\Filament\Admin\Resources\QuestionResource\RelationManagers;
 use App\Models\Category;
 use App\Models\Question;
+use Faker\Core\Number;
+use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -20,7 +25,14 @@ class QuestionResource extends Resource
 {
     protected static ?string $model = Question::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
+
+    protected static ?string $navigationLabel = 'Vragen';
+
+    protected static ?string $modelLabel = 'Vraag';
+
+    protected static ?string $pluralModelLabel = 'Vragen';
+
 
     public static function form(Form $form): Form
     {
@@ -28,13 +40,27 @@ class QuestionResource extends Resource
             ->schema([
                 TextInput::make('question')
                     ->label('Vraag')
+                    ->columnSpanFull()
                     ->required(),
                 Select::make('category_id')
                     ->label('Categorie')
+                    ->relationship('category', 'name')
+                    ->columnSpanFull()
+                    ->preload()
+                    ->live()
                     ->options(
                         Category::all()->pluck('name', 'id')
                     )
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->label('Categorie naam')
+                            ->required(),
+                    ])
                     ->required(),
+                Hidden::make('created_by')
+                    ->default(function() {
+                        $user = auth()->user();
+                    }),
             ]);
     }
 
