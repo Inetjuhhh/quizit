@@ -18,14 +18,12 @@ class AnswerSeeder extends Seeder
             for($i = 0; $i < 3; $i++){
                 \App\Models\Answer::create([
                     'question_id' => $question->id,
-                    'created_by' => $question->created_by,
                     'answer' => $faker->sentence,
                     'is_correct' => false
                 ]);
             }
             \App\Models\Answer::create([
                 'question_id' => $question->id,
-                'created_by' => $question->created_by,
                 'answer' => $faker->sentence,
                 'is_correct' => true
             ]);

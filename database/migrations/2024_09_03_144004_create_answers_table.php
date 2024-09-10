@@ -18,11 +18,6 @@ return new class extends Migration
                     ->on('questions')
                     ->constrained()
                     ->cascadeOnDelete();
-            $table  ->foreignId('created_by')
-                    ->references('id')
-                    ->on('users')
-                    ->constrained()
-                    ->cascadeOnDelete();
             $table  ->text('answer');
             $table  ->boolean('is_correct')
                     ->default(false);
