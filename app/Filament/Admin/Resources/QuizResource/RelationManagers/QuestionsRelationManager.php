@@ -19,6 +19,8 @@ class QuestionsRelationManager extends RelationManager
 
     protected static ?string $modelLabel = 'Vraag';
 
+    protected static ?string $navigationLabel = 'Vragen';
+
 
 
     public function form(Form $form): Form

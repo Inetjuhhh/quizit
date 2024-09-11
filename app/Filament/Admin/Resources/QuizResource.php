@@ -37,16 +37,18 @@ class QuizResource extends Resource
                 Hidden::make('user_id')
                     ->default(auth()->id()),
                 TextInput::make('name')
-                    ->label('Name')
+                    ->label('Naam')
                     ->required(),
                 TextInput::make('description')
-                    ->label('Description')
+                    ->label('Beschrijving')
                     ->required(),
                 Forms\Components\DateTimePicker::make('starts_at')
-                    ->label('Starts At')
+                    ->label('Start op')
+                    ->default(Date::now())
                     ->required(),
                 Forms\Components\DateTimePicker::make('ends_at')
-                    ->label('Ends At')
+                    ->label('Eindigt op')
+                    ->default(Date::now())
                     ->required(),
             ]);
     }
