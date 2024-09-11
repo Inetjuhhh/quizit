@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             TypeSeeder::class,
             QuestionSeeder::class,
             AnswerSeeder::class,
+            QuizSeeder::class,
         ]);
     }
 }

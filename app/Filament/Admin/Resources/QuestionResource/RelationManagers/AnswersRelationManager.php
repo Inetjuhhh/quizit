@@ -51,9 +51,11 @@ class AnswersRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('answer')
+            ->recordTitleAttribute('Antwoord')
             ->columns([
-                Tables\Columns\TextColumn::make('answer'),
+                Tables\Columns\TextColumn::make('answer')
+                    ->searchable()
+                    ->label('Antwoord'),
                 Tables\Columns\IconColumn::make('is_correct')
                     ->label('Is juist?')
                     ->icon(function ($record) {
