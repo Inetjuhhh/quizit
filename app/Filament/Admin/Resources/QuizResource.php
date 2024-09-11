@@ -5,7 +5,9 @@ namespace App\Filament\Admin\Resources;
 use App\Filament\Admin\Resources\QuizResource\Pages;
 use App\Filament\Admin\Resources\QuizResource\RelationManagers;
 use App\Models\Quiz;
+use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -32,6 +34,8 @@ class QuizResource extends Resource
     {
         return $form
             ->schema([
+                Hidden::make('user_id')
+                    ->default(auth()->id()),
                 TextInput::make('name')
                     ->label('Name')
                     ->required(),
