@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,6 +17,12 @@ Route::get('/dashboard', function () {
 Route::get('/userpage', function () {
     return view('userpage');
 })->middleware(['auth', 'verified'])->name('userpage');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/quizes/index', [QuizController::class, 'index'])->name('quizes.index');
+    Route::get('/quizes/show/{id}', [QuizController::class, 'show'])->name('quizes.show');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
