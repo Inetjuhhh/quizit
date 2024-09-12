@@ -19,30 +19,22 @@ class QuizController extends Controller
     public function show(string $id)
     {
         $quiz = Quiz::findOrFail($id);
-        return view('quizes.show')->with('quiz', $quiz);
+        $questions = $quiz->questions;
+        $categories = [];
+        foreach ($questions as $question) {
+            if (!in_array($question->category->name, $categories)) {
+                $categories[] = $question->category->name;
+            }
+        }
+        return view('quizes.show')
+            ->with('quiz', $quiz)
+            ->with('categories', $categories);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function play(string $id)
     {
-        //
+        $quiz = Quiz::findOrFail($id);
+        return view('quizes.play')->with('quiz', $quiz);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
