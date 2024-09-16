@@ -1,4 +1,4 @@
-<p align="center"><img src="{{ asset('img/quiz.jpg') }}" alt="quizit-logo" width="50px" class="rounded-xl"></p>
+<p align="center"><img src="{{ quiz.jpg' }}" alt="quizit-logo" width="50px" class="rounded-xl"></p>
 
 <p align="center">
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
@@ -9,10 +9,14 @@ QuizIt is an application you can use to make whatever quiz you want to make. Wit
 In the user view your students or pupils can execute quizes, automaticly see their scores and review the questions. They also manage their past scores. 
 
 ## Documentation
-** In this 'README.md`: **
-* [ Getting started] Getting started
+In this 'README.md`:
+* [🔰Getting started] 
+* [🔧Technologies and packages]
+* [😵‍💫Issues] 
+* [🤗Contributing] (docs/github-flow.md)
 
-## Getting started
+
+## 🔰 Getting started
 ### 1. Install prerequisites
 
 Ensure you have installed:
@@ -75,37 +79,20 @@ Ensure you have installed:
 - Login with any of the credentials found in the [seeder file](database/seeders/DatabaseSeeder.php)
 
 
-## Technologies and Packages
+## 🔧Technologies and Packages
 In this application I am using the following software, frameworks and packages:
-- ** php 8.2.17
-- ** MySQL 8.0
-- ** Vue
-- ** Laravel 11.21.0
-- ** Vite 5.0
-- ** Tailwind 3.4.11
-- ** Alpine js 3.4.2
+- php 8.2.17
+- MySQL 8.0
+- Vue
+- Laravel 11.21.0
+- Vite 5.0
+- Tailwind 3.4.11
+- Alpine js 3.4.2
 
-## Issues
+## 😵‍💫 Issues
 In my repository you can see what issues I am working on. Feel free to add issues if you think there is a feature you wouldn't want to miss in this application.
 
-## Contributing
+## 🤗 Contributing
 Do you want to contribute to my project, feel free to contact me and give suggestions to make it a wicked quiz application.
 Use the next steps to contribute.
-
-- ### Clone the repository
-git clone https://github.com/yourusername/quizit.git
-- ### Navigate to the project folder
-cd quizit
-- ### Install dependencies
-composer install
-npm install
-- ### Copy .env file and configure environment variables
-cp .env.example .env
-php artisan key:generate
-- ### Configure the database in .env file
-- ### Run database migrations and seeders
-php artisan migrate --seed
-- ### Start local development server
-php artisan serve
-npm run dev
 
