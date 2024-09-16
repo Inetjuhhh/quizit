@@ -1,4 +1,4 @@
-# 🐛 GitHub Flow
+# GitHub Flow
 
 We adhere to the [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow/) when working with Git and GitHub.
 
