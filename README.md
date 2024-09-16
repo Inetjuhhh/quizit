@@ -94,5 +94,5 @@ In my repository you can see what issues I am working on. Feel free to add issue
 
 ## 🤗 Contributing
 Do you want to contribute to my project, feel free to contact me and give suggestions to make it a wicked quiz application.
-Use the steps in our <a href="images/github-flow.md">Github flow</a> to check how to commit.
+Use the steps in our <a href="docs/images/github-flow.md">Github flow</a> to check how to commit.
 
