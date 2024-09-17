@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('quizes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table
+                ->foreignId('author_id')
+                ->references('id')
+                ->on('users')
+                ->constrained();
             $table->string('name');
             $table->string('description');
             $table->datetime('starts_at');

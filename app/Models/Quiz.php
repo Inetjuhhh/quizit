@@ -18,8 +18,14 @@ class Quiz extends Model
         return $this->belongsToMany(Question::class, 'quiz_question');
     }
 
-    public function user()
+    public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_quiz');
+    }
+
 }

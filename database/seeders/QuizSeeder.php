@@ -14,21 +14,28 @@ class QuizSeeder extends Seeder
     {
         $quizes = [
             [
-                'user_id' => 1,
+                'author_id' => 1,
                 'name' => 'Quiz 1',
                 'description' => 'This is quiz 1',
                 'starts_at' => now(),
                 'ends_at' => now()->addDays(1),
             ],
             [
-                'user_id' => 1,
+                'author_id' => 1,
                 'name' => 'Quiz 2',
                 'description' => 'This is quiz 2',
                 'starts_at' => now(),
                 'ends_at' => now()->addDays(1),
             ],
             [
-                'user_id' => 1,
+                'author_id' => 1,
+                'name' => 'Quiz 3',
+                'description' => 'This is quiz 3',
+                'starts_at' => now(),
+                'ends_at' => now()->addDays(1),
+            ],
+            [
+                'author_id' => 3,
                 'name' => 'Quiz 3',
                 'description' => 'This is quiz 3',
                 'starts_at' => now(),
@@ -44,7 +51,7 @@ class QuizSeeder extends Seeder
         $quizes = \App\Models\Quiz::all();
 
         foreach ($quizes as $quiz) {
-            for($i = 0; $i < 5; $i++){
+            for($i = 0; $i < 3; $i++){
                 $question = $questions->random();
                 $quiz->questions()->attach($question->id);
             }

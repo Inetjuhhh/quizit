@@ -16,6 +16,16 @@ class User extends Authenticatable
         return $this->belongsTo(Rol::class);
     }
 
+    public function authoredQuizes()
+    {
+        return $this->hasMany(Quiz::class, 'author_id');
+    }
+
+    public function quizes()
+    {
+        return $this->belongsToMany(Quiz::class, 'user_quiz');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
