@@ -64,7 +64,6 @@ class QuestionsRelationManager extends RelationManager
                     ])
                     ->action(function($data, Get $get) {
                         $question_id = $data['question_id'];
-                        $quiz_id = $this->ownerRecord->id;
                         $this->ownerRecord->questions()->attach($question_id);
                     }),
             ])
