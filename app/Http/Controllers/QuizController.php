@@ -37,4 +37,21 @@ class QuizController extends Controller
         return view('quizes.play')->with('quiz', $quiz);
     }
 
+    public function checkMultiple(string $id)
+    {
+
+        $quiz = Quiz::findOrFail($id);
+        $questions = $quiz->questions;
+        $score = 0;
+        foreach ($questions as $question) {
+            $answer = request()->input('question_' . $question->id);
+            if ($answer == $question->correct_answer) {
+                $score++;
+            }
+        }
+        return view('quizes.result')
+            ->with('score', $score)
+            ->with('total', count($questions))
+            ->with('quiz', $quiz);
+    }
 }

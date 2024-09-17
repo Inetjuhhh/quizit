@@ -16,7 +16,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('quizes.index')" :active="request()->routeIs('quizes.index')" class="text-xl text-slate-50">
-                        {{ __('Quizzes') }}
+                        {{ __('Quizes') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('userquiz.index')" :active="request()->routeIs('userquiz.index')" class="text-xl text-slate-50">
+                        {{ __('Uitgevoerde Quizes') }}
                     </x-nav-link>
                 </div>
             </div>
