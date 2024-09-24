@@ -2,15 +2,33 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
+            <div class="flex justify-between w-full">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                <div class="shrink-0 flex items-center hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
+                    <h1 class="text-xl text-slate-50">QuizIT!</h1>
                 </div>
+                <div class="flex items-center justify-between text-right">
+                    @if (Route::has('login'))
+                        <nav class=" flex justify-between">
+                            @auth
+                                <a href="{{ url('/userpage') }}" class="text-xl text-slate-50">Dashboard</a>
+                            @else
+                                <a href="{{ route('login') }}" class="w-25 py-4 hover:border-b hover:border-solid hover:border-white-600 hover:text-xl text-xl text-slate-50 pr-25">Log in</a>
+
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="w-25 py-4 hover:border-b hover:border-solid hover:border-white-600 hover:text-xl text-xl text-slate-50">Register</a>
+                                @endif
+                            @endauth
+                        </nav>
+                    @endif
+                </div>
+            </div>
 
                 <!-- Navigation Links -->
+                @auth
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-xl text-slate-50">
                         {{ __('Dashboard') }}
@@ -22,9 +40,11 @@
                         {{ __('Uitgevoerde Quizes') }}
                     </x-nav-link>
                 </div>
-            </div>
+                @endauth
+
 
             <!-- Settings Dropdown -->
+            @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -57,6 +77,7 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @endauth
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
@@ -79,6 +100,7 @@
         </div>
 
         <!-- Responsive Settings Options -->
+        @auth
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
@@ -102,5 +124,6 @@
                 </form>
             </div>
         </div>
+        @endauth
     </div>
 </nav>
