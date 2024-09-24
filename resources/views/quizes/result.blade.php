@@ -12,6 +12,12 @@
                     <h4 class="text-3xl my-5">Jouw score: {{$score}}/{{$total }} ({{ $percentage }})%</h4>
                 </li>
             </ul>
+            <ol>
+            @foreach ($answerComplete as $answer)
+                <li><h3 class="text-3xl my-5">{{$answer->question->question}}</h3></li>
+                <li><h4 class="text-2xl italic my-5 {{ $answer->is_correct ? 'text-green-500' : 'text-red-500' }}">{{$answer->answer}}</h4></li>
+            @endforeach
+            </ol>
         </div>
 
     </x-slot>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
@@ -44,10 +45,15 @@ class QuizController extends Controller
         $questions = $quiz->questions;
         $answers = request()->except('_token');
 
+
         $score = 0;
+        $answerComplete = [];
 
         foreach($answers as  $question_id => $answer){
             $question = Question::find($question_id);
+            $answerTo = Answer::find($answer);
+            //add answerTo to answerComplete array
+            $answerComplete[$question_id] = $answerTo;
             $correct_answer = $question->answers->where('is_correct', true)->first()->id;
             if($answer == $correct_answer){
                 $score++;
@@ -55,10 +61,13 @@ class QuizController extends Controller
         }
         $percentage = round(($score / count($questions)) * 100, 1);
 
-        return view('quizes.result')
-            ->with('score', $score)
-            ->with('total', count($questions))
-            ->with('percentage', $percentage)
-            ->with('quiz', $quiz);
+        return view('quizes.result', [
+            'score' => $score,
+            'total' => count($questions),
+            'percentage' => $percentage,
+            'quiz' => $quiz,
+            'questions' => $questions,
+            'answerComplete' => $answerComplete
+        ]);
     }
 }
