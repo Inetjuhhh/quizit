@@ -41,29 +41,34 @@ class QuizController extends Controller
 
     public function checkMultiple(string $id)
     {
-        $quiz = Quiz::findOrFail($id);
+        $quiz = Quiz::with('questions.answers')->findOrFail($id);
         $questions = $quiz->questions;
         $answers = request()->except('_token');
-
 
         $score = 0;
         $answerComplete = [];
 
-        foreach($answers as  $question_id => $answer){
-            $question = Question::find($question_id);
-            $answerTo = Answer::find($answer);
-            //add answerTo to answerComplete array
-            $answerComplete[$question_id] = $answerTo;
-            $correct_answer = $question->answers->where('is_correct', true)->first()->id;
-            if($answer == $correct_answer){
-                $score++;
+        foreach($questions as $question) {
+            $submittedAnswerId = $answers[$question->id] ?? null;
+
+            $correctAnswer = $question->answers->firstWhere('is_correct', true);
+
+            if ($submittedAnswerId) {
+                $submittedAnswer = $question->answers->find($submittedAnswerId);
+                $answerComplete[$question->id] = $submittedAnswer;
+
+                if ($correctAnswer && $submittedAnswerId == $correctAnswer->id) {
+                    $score++;
+                }
             }
         }
-        $percentage = round(($score / count($questions)) * 100, 1);
+
+        $totalQuestions = $questions->count();
+        $percentage = $totalQuestions > 0 ? round(($score / $totalQuestions) * 100, 1) : 0;
 
         return view('quizes.result', [
             'score' => $score,
-            'total' => count($questions),
+            'total' => $totalQuestions,
             'percentage' => $percentage,
             'quiz' => $quiz,
             'questions' => $questions,
