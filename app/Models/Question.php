@@ -11,11 +11,6 @@ class Question extends Model
     protected $table = 'questions';
     protected $guarded = [];
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
     public function answers()
     {
         return $this->hasMany(Answer::class);
@@ -34,5 +29,10 @@ class Question extends Model
     public function quizes()
     {
         return $this->belongsToMany(Quiz::class, 'quiz_question');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'question_category');
     }
 }

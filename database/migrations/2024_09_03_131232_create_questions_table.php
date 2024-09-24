@@ -13,11 +13,6 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table  ->id();
-            $table  ->foreignId('category_id')
-                    ->references('id')
-                    ->on('categories')
-                    ->nullable()
-                    ->constrained();
             $table  ->foreignId('type_id');
             $table  ->foreignId('created_by')
                     ->references('id')
