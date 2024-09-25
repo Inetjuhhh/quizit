@@ -36,8 +36,8 @@ class QuizSeeder extends Seeder
             ],
             [
                 'author_id' => 3,
-                'name' => 'Quiz 3',
-                'description' => 'This is quiz 3',
+                'name' => 'Quiz 4',
+                'description' => 'This is quiz 4',
                 'starts_at' => now(),
                 'ends_at' => now()->addDays(1),
             ],

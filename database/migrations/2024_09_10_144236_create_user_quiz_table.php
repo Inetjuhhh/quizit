@@ -21,6 +21,8 @@ return new class extends Migration
                 ->references('id')
                 ->on('quizes');
             $table->integer('score')->nullable();
+            $table->integer('time')->nullable();
+            $table->timestamp('completed_at')->nullable();
             $table->timestamps();
         });
     }

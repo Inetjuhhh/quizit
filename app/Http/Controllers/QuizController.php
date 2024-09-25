@@ -24,8 +24,11 @@ class QuizController extends Controller
         $questions = $quiz->questions;
         $categories = [];
         foreach ($questions as $question) {
-            if (!in_array($question->category->name, $categories)) {
-                $categories[] = $question->category->name;
+            //check which categories belong to the quiz in pivot table question_category and add to $categories
+            if ($question->categories->count() > 0) {
+                foreach ($question->categories as $category) {
+                    $categories[$category->id] = $category->name;
+                }
             }
         }
         return view('quizes.show')
@@ -65,6 +68,8 @@ class QuizController extends Controller
 
         $totalQuestions = $questions->count();
         $percentage = $totalQuestions > 0 ? round(($score / $totalQuestions) * 100, 1) : 0;
+
+        $quiz->users()->attach(auth()->user(), ['score' => $score, 'completed_at' => now()]);
 
         return view('quizes.result', [
             'score' => $score,
