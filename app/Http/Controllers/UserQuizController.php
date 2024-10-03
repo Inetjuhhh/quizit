@@ -8,7 +8,8 @@ class UserQuizController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
         return view('userquiz.index')
-            ->with('userquizes', auth()->user()->quizes);
+            ->with('user', $user);
     }
 }

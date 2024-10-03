@@ -23,7 +23,8 @@ class User extends Authenticatable
 
     public function quizes()
     {
-        return $this->belongsToMany(Quiz::class, 'user_quiz');
+        return $this->belongsToMany(Quiz::class, 'user_quiz')
+            ->withPivot('score', 'completed_at');
     }
 
     /**
