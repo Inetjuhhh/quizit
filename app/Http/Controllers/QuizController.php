@@ -16,17 +16,21 @@ class QuizController extends Controller
     {
         $user = auth()->user();
         $quizes = Quiz::all();
-        //check if user has executed quizes in user_quiz
         $userQuizes = $user->quizes;
         $completedQuizes = [];
+
         foreach ($userQuizes as $userQuiz) {
-            $completedQuizes[$userQuiz->id] = $userQuiz->pivot->score;
+            $completedQuizes[$userQuiz->id] = [
+                'score' => $userQuiz->pivot->score,
+                'completed_at' => $userQuiz->pivot->completed_at
+            ];
         }
+
         return view('quizes.index')
             ->with('quizes', $quizes)
             ->with('user', $user)
             ->with('completedQuizes', $completedQuizes);
-    }
+        }
 
     public function show(string $id)
     {
