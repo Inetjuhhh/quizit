@@ -14,8 +14,18 @@ class QuizController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
         $quizes = Quiz::all();
-        return view('quizes.index')->with('quizes', $quizes);
+        //check if user has executed quizes in user_quiz
+        $userQuizes = $user->quizes;
+        $completedQuizes = [];
+        foreach ($userQuizes as $userQuiz) {
+            $completedQuizes[$userQuiz->id] = $userQuiz->pivot->score;
+        }
+        return view('quizes.index')
+            ->with('quizes', $quizes)
+            ->with('user', $user)
+            ->with('completedQuizes', $completedQuizes);
     }
 
     public function show(string $id)
