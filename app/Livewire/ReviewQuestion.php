@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Question;
+use App\Models\UserQuestionVote;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ReviewQuestion extends Component
@@ -32,6 +34,16 @@ class ReviewQuestion extends Component
     {
         $question = Question::find($this->questionId);
 
+        $existingVote = UserQuestionVote::where('user_id', Auth::id())
+        ->where('question_id', $this->questionId)
+        ->where('vote', 'up')
+        ->first();
+
+        if ($existingVote) {
+        // User has already upvoted, do not allow another upvote
+        return;
+        }
+
         if ($question) {
             $reviewQuestion = $question->reviewQuestion;
 
@@ -42,6 +54,11 @@ class ReviewQuestion extends Component
                 $reviewQuestion->question->id = $this->questionId;
                 $reviewQuestion->score = 1;
             }
+            UserQuestionVote::create([
+                'user_id' => Auth::id(),
+                'question_id' => $this->questionId,
+                'vote' => 'up'
+            ]);
 
             $reviewQuestion->save();
             $this->score = $reviewQuestion->score;
@@ -52,9 +69,25 @@ class ReviewQuestion extends Component
     {
         $question = Question::find($this->questionId);
 
+        $existingVote = UserQuestionVote::where('user_id', Auth::id())
+        ->where('question_id', $this->questionId)
+        ->where('vote', 'up')
+        ->first();
+
+        if ($existingVote) {
+        return;
+        }
+
         if ($question && $question->reviewQuestion) {
             $reviewQuestion = $question->reviewQuestion;
             $reviewQuestion->score -= 1;
+
+            UserQuestionVote::create([
+                'user_id' => Auth::id(),
+                'question_id' => $this->questionId,
+                'vote' => 'down'
+            ]);
+
             $reviewQuestion->save();
 
             $this->score = $reviewQuestion->score;

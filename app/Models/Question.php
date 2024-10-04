@@ -40,4 +40,9 @@ class Question extends Model
     {
         return $this->hasOne(ReviewQuestion::class);
     }
+
+    public function userQuestionVote()
+    {
+        return $this->hasMany(UserQuestionVote::class);
+    }
 }

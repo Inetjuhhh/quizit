@@ -27,6 +27,11 @@ class User extends Authenticatable
             ->withPivot('score', 'completed_at');
     }
 
+    public function userQuestionVote()
+    {
+        return $this->hasMany(UserQuestionVote::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
