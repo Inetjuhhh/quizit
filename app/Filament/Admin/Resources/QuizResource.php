@@ -34,7 +34,7 @@ class QuizResource extends Resource
     {
         return $form
             ->schema([
-                Hidden::make('user_id')
+                Hidden::make('author_id')
                     ->default(auth()->id()),
                 TextInput::make('name')
                     ->label('Naam')

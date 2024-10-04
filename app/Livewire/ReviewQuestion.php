@@ -40,8 +40,7 @@ class ReviewQuestion extends Component
         ->first();
 
         if ($existingVote) {
-        // User has already upvoted, do not allow another upvote
-        return;
+            return;
         }
 
         if ($question) {

@@ -40,20 +40,6 @@ class QuestionResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('category_id')
-                    ->label('Categorie')
-                    ->relationship('category', 'name')
-                    ->preload()
-                    ->live()
-                    ->options(
-                        Category::all()->pluck('name', 'id')
-                    )
-                    ->createOptionForm([
-                        TextInput::make('name')
-                            ->label('Categorie naam')
-                            ->required(),
-                    ])
-                    ->required(),
                 Select::make('type_id')
                     ->label('Type vraag')
                     ->relationship('type', 'name')
@@ -68,6 +54,15 @@ class QuestionResource extends Resource
                     ->columnSpanFull()
                     ->required(),
 
+                Select::make('question.category_id')
+                    ->label('Categorie')
+                    ->multiple()
+                    ->relationship('category', 'name')
+                    ->options(
+                        Category::all()->pluck('name', 'id')
+                    )
+                   
+                ->required(),
                 // TextInput::make('answer')
                 //     ->label('Antwoord')
                 //     ->columnSpanFull()
