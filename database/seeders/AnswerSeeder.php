@@ -64,6 +64,9 @@ class AnswerSeeder extends Seeder
 
         $questions = \App\Models\Question::all();
         foreach($questions as $question){
+            if($question->id == 1 || $question->id == 2){
+                continue;
+            }
             for($i = 0; $i < 3; $i++){
                 \App\Models\Answer::create([
                     'question_id' => $question->id,
