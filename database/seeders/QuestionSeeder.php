@@ -35,5 +35,14 @@ class QuestionSeeder extends Seeder
             $question->created_by = rand(1, (count($users)-1));
             $question->save();
         }
+
+        $questions = \App\Models\Question::all();
+        foreach($questions as $question){
+            $reviewQuestion = new \App\Models\ReviewQuestion();
+            $reviewQuestion->question_id = $question->id;
+            $reviewQuestion->score = rand(1, 5);
+            $reviewQuestion->save();
+        }
+
     }
 }

@@ -35,4 +35,9 @@ class Question extends Model
     {
         return $this->belongsToMany(Category::class, 'question_category');
     }
+
+    public function reviewQuestion()
+    {
+        return $this->hasOne(ReviewQuestion::class);
+    }
 }

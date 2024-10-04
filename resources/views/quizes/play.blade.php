@@ -1,15 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
-
         <div class="border-solid border-2 border-slate-300 rounded-lg p-10 bg-slate-100 ">
-            <h2 class="text-5xl my-5">{{$quiz->name}}</h1>
+            <h2 class="text-5xl my-5">{{$quiz->name}}</h2>
             <p class="text-2xl my-5">{{$quiz->description}}</p>
         </div>
         <form action="{{ route('quiz.checkMultiple', $quiz->id)}}" method="POST">
             @csrf
             @foreach($quiz->questions as $question)
                 <div class="border-solid border-2 border-slate-300 rounded-lg p-10 my-5 bg-slate-100">
-                    <h3 class="text-3xl my-5">{{$question->question}}</h3>
+                    <div class="flex justify-between align-center">
+                        <h3 class="text-3xl my-5">{{$question->question}}</h3>
+                        <div class="flex items-center space-x-4">
+                            {{-- @livewire('test-comp') --}}
+                            @livewire('review-question', ['questionId' => $question->id], key($question->id))
+                        </div>
+                    </div>
                     <ul>
                         @foreach($question->answers as $answer)
                             <li class="my-5">
@@ -24,4 +29,3 @@
         </form>
     </x-slot>
 </x-app-layout>
-
