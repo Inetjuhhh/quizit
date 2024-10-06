@@ -54,15 +54,21 @@ class QuestionResource extends Resource
                     ->columnSpanFull()
                     ->required(),
 
-                Select::make('question.category_id')
-                    ->label('Categorie')
+                Select::make('categories')
+                    ->label('Categorieën')
                     ->multiple()
-                    ->relationship('category', 'name')
+                    ->preload()
+                    ->relationship('categories', 'name')
                     ->options(
                         Category::all()->pluck('name', 'id')
                     )
-                   
-                ->required(),
+                    ->required()
+                    ->columnSpanFull()
+                    ->createOptionForm([
+                            TextInput::make('name')
+                                ->label('Naam')
+                                ->required()
+                ]),
                 // TextInput::make('answer')
                 //     ->label('Antwoord')
                 //     ->columnSpanFull()
