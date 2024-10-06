@@ -44,6 +44,7 @@ class QuestionResource extends Resource
                     ->label('Type vraag')
                     ->relationship('type', 'name')
                     ->live()
+                    ->columnSpanFull()
                     ->options(
                         Type::all()->pluck('type', 'id')
                     )
