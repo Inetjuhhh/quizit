@@ -1,10 +1,10 @@
 <nav x-data="{ open: false }" class="bg-slate-500 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 py-10 ">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="h-16">
             <div class="flex justify-between">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="w-1/4 shrink-0 flex items-center hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
@@ -12,11 +12,11 @@
                 </div>
                 <div class="flex items-center justify-between text-right">
                     @if (Route::has('login'))
-                        <nav class=" flex justify-between">
+                        <nav class="text-right ">
                             @auth
                                 <a href="{{ url('/userpage') }}" class="text-xl text-slate-50">Dashboard</a>
                             @else
-                                <a href="{{ route('login') }}" class="w-25 py-4 hover:border-b hover:border-solid hover:border-white-600 hover:text-xl text-xl text-slate-50 pr-25">Log in</a>
+                                <a href="{{ route('login') }}" class="mr-10 w-25 py-4 hover:border-b hover:border-solid hover:border-white-600 hover:text-xl text-xl text-slate-50 pr-25">Log in</a>
 
                                 @if (Route::has('register'))
                                     <a href="{{ route('register') }}" class="w-25 py-4 hover:border-b hover:border-solid hover:border-white-600 hover:text-xl text-xl text-slate-50">Register</a>
@@ -25,7 +25,6 @@
                         </nav>
                     @endif
                 </div>
-            </div>
 
                 <!-- Navigation Links -->
                 @auth
@@ -75,6 +74,7 @@
                 </x-dropdown>
             </div>
             @endauth
+        </div>
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
