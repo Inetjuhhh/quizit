@@ -16,8 +16,8 @@
         <x-app-layout>
             <x-slot name="header">
                 <section class="bg-white dark:bg-gray-900 ">
-                    <div class="py-8 px-4 mx-auto max-w-screen-xxl sm:py-16 lg:px-6">
-                        <div class="max-w-screen-md">
+                    <div class="py-8 px-4 max-w-7xl mx-auto max-w-screen-xxl sm:py-16 lg:px-6">
+                        <div class="max-w-7xl">
                             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Creer en doe je eigen favoriete quizes met QuizIT</h2>
                             <p class="mb-8 font-light text-gray-500 sm:text-xl dark:text-gray-400">Met onze quiz-app kun je eenvoudig je eigen quizzes maken en uitvoeren, perfect voor educatieve doeleinden of gewoon voor de lol met vrienden. Kies uit verschillende vraagtypes, voeg je eigen vragen toe en test je kennis of die van anderen. De app biedt interactieve resultaten en houdt scores bij, zodat je altijd kunt zien wie de quizkampioen is. Maak leren en spelen leuker met je eigen persoonlijke quizzen!</p>
                             {{-- <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
