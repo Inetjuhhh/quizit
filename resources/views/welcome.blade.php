@@ -16,16 +16,11 @@
         <x-app-layout>
             <x-slot name="header">
                 <section class="bg-white dark:bg-gray-900 ">
-                    <div class="py-8 px-4 max-w-7xl mx-auto max-w-screen-xxl sm:py-16 lg:px-6">
-                        <div class="max-w-7xl">
+                    <div class="py-8 px-4 max-w-7xl mx-auto max-w-screen-xxl sm:py-16 lg:px-6 flex items-center">
+                        <img src="{{ asset('storage/img/main-entrance-quiz.jpg')}}" alt="main-quiz-img" width="500px" class="mr-20 rounded-xl">
+                        <div class="max-w-5xl">
                             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Creer en doe je eigen favoriete quizes met QuizIT</h2>
-                            <p class="mb-8 font-light text-gray-500 sm:text-xl dark:text-gray-400">Met onze quiz-app kun je eenvoudig je eigen quizzes maken en uitvoeren, perfect voor educatieve doeleinden of gewoon voor de lol met vrienden. Kies uit verschillende vraagtypes, voeg je eigen vragen toe en test je kennis of die van anderen. De app biedt interactieve resultaten en houdt scores bij, zodat je altijd kunt zien wie de quizkampioen is. Maak leren en spelen leuker met je eigen persoonlijke quizzen!</p>
-                            {{-- <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-                                <a href="#" class="inline-flex items-center justify-center px-4 py-2.5 text-base font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-                                    Get started
-                                </a>
-
-                            </div> --}}
+                            <p class="mb-8 fo nt-light text-gray-500 sm:text-xl dark:text-gray-400">Met onze quiz-app kun je eenvoudig je eigen quizzes maken en uitvoeren, perfect voor educatieve doeleinden of gewoon voor de lol met vrienden. Kies uit verschillende vraagtypes, voeg je eigen vragen toe en test je kennis of die van anderen. De app biedt interactieve resultaten en houdt scores bij, zodat je altijd kunt zien wie de quizkampioen is. Maak leren en spelen leuker met je eigen persoonlijke quizzen!</p>
                         </div>
                     </div>
                 </section>
