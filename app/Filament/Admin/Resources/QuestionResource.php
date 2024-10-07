@@ -4,6 +4,8 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\QuestionResource\Pages;
 use App\Filament\Admin\Resources\QuestionResource\RelationManagers;
+use App\Filament\Admin\Widgets\StatsOverview;
+use App\Filament\Admin\Widgets\QuestionCategoryChart;
 use App\Models\Category;
 use App\Models\Question;
 use App\Models\Type;
@@ -123,6 +125,14 @@ class QuestionResource extends Resource
             'index' => Pages\ListQuestions::route('/'),
             'create' => Pages\CreateQuestion::route('/create'),
             'edit' => Pages\EditQuestion::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            QuestionCategoryChart::class,
+            // StatsOverview::class,
         ];
     }
 }
