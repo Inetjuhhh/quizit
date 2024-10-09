@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $this->hasMany(UserQuestionVote::class);
     }
 
+    public function klas()
+    {
+        return $this->belongsTo(Klas::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

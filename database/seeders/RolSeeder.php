@@ -15,6 +15,7 @@ class RolSeeder extends Seeder
         $rollen = [
             'superadmin',
             'admin',
+            'teacher',
             'user',
         ];
 

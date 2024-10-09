@@ -32,11 +32,16 @@ class UserSeeder extends Seeder
             'password' => bcrypt('password'),
             'rol_id' => 2,
         ]);
-        $user = \App\Models\User::create([
-            'name' => 'user',
-            'email' => 'user@test.nl',
-            'password' => bcrypt('password'),
-            'rol_id' => 3,
-        ]);
+
+        $klassen = \App\Models\Klas::all();
+        for($i = 0; $i < 20; $i++) {
+            $user = \App\Models\User::create([
+                'name' => $faker->name,
+                'email' => $faker->email,
+                'password' => bcrypt('password'),
+                'klas_id' => $klassen->random()->id,
+                'rol_id' => 3,
+            ]);
+        }
     }
 }

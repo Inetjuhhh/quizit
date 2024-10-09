@@ -18,6 +18,11 @@ return new class extends Migration
                     ->references('id')
                     ->on( 'rollen')
                     ->constrained();
+            $table  ->string('klas_id')
+                    ->nullable()
+                    ->references('id')
+                    ->on('klassen')
+                    ->constrained();
             $table  ->string('name');
             $table  ->string('email')->unique();
             $table  ->timestamp('email_verified_at')->nullable();
