@@ -3,13 +3,16 @@
 namespace App\Filament\Admin\Resources\KlasResource\RelationManagers;
 
 use Filament\Forms;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Actions\Action;
+use Filament\Forms\Components\Component;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Tables\Actions\Action as ActionsAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -19,6 +22,11 @@ use Illuminate\Support\Facades\Hash;
 class UsersRelationManager extends RelationManager
 {
     protected static string $relationship = 'users';
+    protected static ?string $modelLabel = 'Gebruiker';
+
+    protected static ?string $navigationLabel = 'Gebruikers';
+    protected static ?string $pluralModelLabel = 'Gebruikers';
+
 
     public function form(Form $form): Form
     {
@@ -63,13 +71,30 @@ class UsersRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Naam gebruiker'),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->label('Nieuwe gebruiker toevoegen'),
+                ActionsAction::make('attachUser')
+                ->label('Bestaande gebruiker toevoegen')
+                ->form([
+                    Select::make('user_id')
+                        ->label('Gebruiker')
+                        ->options(
+                            \App\Models\User::all()->pluck('name', 'id')
+                        )
+                        ->required(),
+                ])
+                ->action(function($data, Get $get) {
+                    $user_id = $data['user_id'];
+                    $this->ownerRecord->users()->attach($user_id);
+                }),
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
