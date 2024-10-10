@@ -4,11 +4,11 @@
                    ->exists();
     $hasUpvoted = \App\Models\UserQuestionVote::where('user_id', auth()->id())
                    ->where('question_id', $questionId)
-                   ->where('vote', 'up')
+                   ->where('vote', 1)
                    ->exists();
     $hasDownvoted = \App\Models\UserQuestionVote::where('user_id', auth()->id())
                    ->where('question_id', $questionId)
-                   ->where('vote', 'down')
+                   ->where('vote', -1)
                    ->exists();
 @endphp
 

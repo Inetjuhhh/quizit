@@ -41,7 +41,7 @@ class Question extends Model
         return $this->hasOne(ReviewQuestion::class);
     }
 
-    public function userQuestionVote()
+    public function userQuestionVotes()
     {
         return $this->hasMany(UserQuestionVote::class);
     }

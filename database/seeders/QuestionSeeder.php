@@ -38,10 +38,11 @@ class QuestionSeeder extends Seeder
 
         $questions = \App\Models\Question::all();
         foreach($questions as $question){
-            $reviewQuestion = new \App\Models\ReviewQuestion();
-            $reviewQuestion->question_id = $question->id;
-            $reviewQuestion->score = rand(1, 5);
-            $reviewQuestion->save();
+            $userQuestionVote = new \App\Models\UserQuestionVote();
+            $userQuestionVote->user_id = $users->random()->id;
+            $userQuestionVote->question_id = $question->id;
+            $userQuestionVote->vote = rand(-1, 1);
+            $userQuestionVote->save();
         }
 
     }
