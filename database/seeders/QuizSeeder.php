@@ -52,7 +52,7 @@ class QuizSeeder extends Seeder
 
         foreach ($quizes as $quiz) {
             for($i = 0; $i < 3; $i++){
-                $question = $questions->random();
+                $question = $questions->whereNotIn('id', $quiz->questions->pluck('id'))->random();
                 $quiz->questions()->attach($question->id);
             }
         }
