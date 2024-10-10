@@ -36,7 +36,7 @@ class ReviewQuestion extends Component
 
         $existingVote = UserQuestionVote::where('user_id', Auth::id())
         ->where('question_id', $this->questionId)
-        ->where('vote', 'up')
+        ->where('vote', '1')
         ->first();
 
         if ($existingVote) {
@@ -56,7 +56,7 @@ class ReviewQuestion extends Component
             UserQuestionVote::create([
                 'user_id' => Auth::id(),
                 'question_id' => $this->questionId,
-                'vote' => 'up'
+                'vote' => '1'
             ]);
 
             $reviewQuestion->save();
@@ -70,7 +70,7 @@ class ReviewQuestion extends Component
 
         $existingVote = UserQuestionVote::where('user_id', Auth::id())
         ->where('question_id', $this->questionId)
-        ->where('vote', 'up')
+        ->where('vote', '1')
         ->first();
 
         if ($existingVote) {
@@ -84,7 +84,7 @@ class ReviewQuestion extends Component
             UserQuestionVote::create([
                 'user_id' => Auth::id(),
                 'question_id' => $this->questionId,
-                'vote' => 'down'
+                'vote' => '-1'
             ]);
 
             $reviewQuestion->save();

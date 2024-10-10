@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('question_id')->constrained()->onDelete('cascade');
-            $table->enum('vote', ['up', 'down']);
+            $table->integer('vote');
             $table->timestamps();
         });
     }
