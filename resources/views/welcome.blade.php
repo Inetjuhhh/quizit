@@ -21,10 +21,12 @@
                         <div class="max-w-5xl">
                             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Creer en doe je eigen favoriete quizes met QuizIT</h2>
                             <p class="mb-8 fo nt-light text-gray-500 sm:text-xl dark:text-gray-400">Met onze quiz-app kun je eenvoudig je eigen quizzes maken en uitvoeren, perfect voor educatieve doeleinden of gewoon voor de lol met vrienden. Kies uit verschillende vraagtypes, voeg je eigen vragen toe en test je kennis of die van anderen. De app biedt interactieve resultaten en houdt scores bij, zodat je altijd kunt zien wie de quizkampioen is. Maak leren en spelen leuker met je eigen persoonlijke quizzen!</p>
+                            @if(!Auth::check())
                             <div class="flex">
                                 <a href="{{ route('login') }}" class="mr-10 p-5 bg-gray-400 text-xl text-slate-50 rounded-xl hover:bg-gray-800">Log in</a>
                                 <a href="{{ route('register') }}" class="p-5 bg-gray-400 text-xl text-slate-50 rounded-xl hover:bg-gray-800">Registreer</a>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </section>
