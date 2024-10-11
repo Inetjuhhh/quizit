@@ -49,8 +49,7 @@ class QuestionResource extends Resource
                     ->columnSpanFull()
                     ->options(
                         Type::all()->pluck('type', 'id')
-                    )
-                    ->required(),
+                    ),
 
                 TextInput::make('question')
                     ->label('Vraag')

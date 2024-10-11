@@ -20,7 +20,8 @@ return new class extends Migration
                     ->cascadeOnDelete();
             $table  ->text('answer');
             $table  ->boolean('is_correct')
-                    ->default(false);
+                    ->default(false)
+                    ->nullable();
             $table  ->timestamps();
         });
     }

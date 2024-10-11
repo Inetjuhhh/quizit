@@ -16,12 +16,20 @@
                         </div>
                     </div>
                     <ul>
-                        @foreach($question->answers as $answer)
-                            <li class="my-5">
-                                <input type="radio" id="{{$answer->id}}" name="{{$question->id}}" value="{{$answer->id}}" class="hover:text-blue-400" required>
-                                <label class="text-xl" for="{{$answer->id}}">{{$answer->answer}}</label>
-                            </li>
-                        @endforeach
+                        @if($question->type->type == 'meerkeuze')
+
+                            @foreach($question->answers as $answer)
+                                <li class="my-5">
+                                    <input type="radio" id="{{$answer->id}}" name="{{$question->id}}" value="{{$answer->id}}" class="hover:text-blue-400" required>
+                                    <label class="text-xl" for="{{$answer->id}}">{{$answer->answer}}</label>
+                                </li>
+                            @endforeach
+
+                        @elseif($question->type->type == 'open')
+                            <input type="text" style="width:80%" name="{{$question->id}}" class="border-solid border-2 border-slate-300 rounded-lg p-2 my-5">
+                        @else
+                            <p>Geen type gevonden</p>
+                        @endif
                     </ul>
                 </div>
             @endforeach
