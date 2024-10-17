@@ -20,6 +20,15 @@ return new class extends Migration
             $table->foreignId('quiz_id')->constrained()
                 ->references('id')
                 ->on('quizes');
+            $table->foreignId('question_id')->constrained()
+                ->references('id')
+                ->on('questions');
+            $table->foreignId('answer_id')->constrained()
+                ->nullable()
+                ->references('id')
+                ->on('answers');
+            $table->text('open_answer')->nullable();
+            $table->boolean('is_correct')->nullable();
             $table->integer('score')->nullable();
             $table->integer('time')->nullable();
             $table->timestamp('completed_at')->nullable();
