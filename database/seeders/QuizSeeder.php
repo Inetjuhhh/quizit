@@ -51,9 +51,12 @@ class QuizSeeder extends Seeder
         $quizes = \App\Models\Quiz::all();
 
         foreach ($quizes as $quiz) {
-            for($i = 0; $i < 3; $i++){
+            for($i = 0; $i < 5; $i++){
                 $question = $questions->whereNotIn('id', $quiz->questions->pluck('id'))->random();
-                $quiz->questions()->attach($question->id);
+
+                if (!$quiz->questions->contains($question->id)) {
+                    $quiz->questions()->attach($question->id);
+                }
             }
         }
     }

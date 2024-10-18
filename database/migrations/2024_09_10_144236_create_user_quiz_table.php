@@ -23,8 +23,9 @@ return new class extends Migration
             $table->foreignId('question_id')->constrained()
                 ->references('id')
                 ->on('questions');
-            $table->foreignId('answer_id')->constrained()
+            $table->foreignId('answer_id')
                 ->nullable()
+                ->constrained()
                 ->references('id')
                 ->on('answers');
             $table->text('open_answer')->nullable();
