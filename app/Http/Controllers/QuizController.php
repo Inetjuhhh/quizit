@@ -81,7 +81,7 @@ class QuizController extends Controller
                         $score++;
                     }
 
-                    UserQuiz::create([
+                    UserQuiz::updateOrCreate([
                         'user_id' => auth()->id(),
                         'quiz_id' => $quiz->id,
                         'question_id' => $question->id,
@@ -93,7 +93,7 @@ class QuizController extends Controller
             elseif($question->type->type == 'open'){
                 $openAnswers[$question->id] = $answers[$question->id] ?? null;
 
-                UserQuiz::create([
+                UserQuiz::updateOrCreate([
                     'user_id' => auth()->id(),
                     'quiz_id' => $quiz->id,
                     'question_id' => $question->id,
@@ -108,15 +108,11 @@ class QuizController extends Controller
         $percentage = $totalQuestions > 0 ? round(($score / $totalQuestions) * 100, 1) : 0;
 
         return view('quizes.result', [
-            //add this userQuiz to the view
-
             'userQuizes' => UserQuiz::where('quiz_id', $quiz->id)->where('user_id', auth()->id())->get(),
             'score' => $score,
             'total' => $totalQuestions,
             'percentage' => $percentage,
             'quiz' => $quiz,
-            'questions' => $questions,
-            'answerComplete' => $answerComplete
         ]);
     }
 }
