@@ -25,32 +25,38 @@ class UserQuizSeeder extends Seeder
 
         foreach($users as $user){
             foreach($quizes as $quiz){
-                $questions = $quiz->questions;
-                foreach($questions as $question){
-                    if($question->type->type == 'meerkeuze'){
-                        $answer = $question->answers->random();
-                        $correctAnswer = $answer->is_correct;
+                $rand = rand(0, 1);
+                if($rand === 0){
+                    continue;
+                }
+                else{
+                    $questions = $quiz->questions;
+                    foreach($questions as $question){
+                        if($question->type->type == 'meerkeuze'){
+                            $answer = $question->answers->random();
+                            $correctAnswer = $answer->is_correct;
+                                $userQuiz = new \App\Models\UserQuiz();
+                                $userQuiz->user_id = $user->id;
+                                $userQuiz->quiz_id = $quiz->id;
+                                $userQuiz->question_id = $question->id;
+                                $userQuiz->answer_id = $question->answers->random()->id;
+                                $userQuiz->open_answer = null;
+                                $userQuiz->is_correct = $correctAnswer;
+                                $userQuiz->score = rand(0, 3);
+                                $userQuiz->time = rand(0, 100);
+                                $userQuiz->save();
+                        }
+                        elseif($question->type->type === 'open'){
                             $userQuiz = new \App\Models\UserQuiz();
                             $userQuiz->user_id = $user->id;
                             $userQuiz->quiz_id = $quiz->id;
                             $userQuiz->question_id = $question->id;
-                            $userQuiz->answer_id = $question->answers->random()->id;
-                            $userQuiz->open_answer = null;
-                            $userQuiz->is_correct = $correctAnswer;
+                            $userQuiz->answer_id = null;
+                            $userQuiz->open_answer = $openAnswer[array_rand($openAnswer)];
                             $userQuiz->score = rand(0, 3);
                             $userQuiz->time = rand(0, 100);
                             $userQuiz->save();
-                    }
-                    elseif($question->type->type === 'open'){
-                        $userQuiz = new \App\Models\UserQuiz();
-                        $userQuiz->user_id = $user->id;
-                        $userQuiz->quiz_id = $quiz->id;
-                        $userQuiz->question_id = $question->id;
-                        $userQuiz->answer_id = null;
-                        $userQuiz->open_answer = $openAnswer[array_rand($openAnswer)];
-                        $userQuiz->score = rand(0, 3);
-                        $userQuiz->time = rand(0, 100);
-                        $userQuiz->save();
+                        }
                     }
                 }
             }

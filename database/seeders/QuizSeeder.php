@@ -41,6 +41,21 @@ class QuizSeeder extends Seeder
                 'starts_at' => now(),
                 'ends_at' => now()->addDays(1),
             ],
+            [
+                'author_id' => 3,
+                'name' => 'Quiz 5',
+                'description' => 'This is quiz 5',
+                'starts_at' => now(),
+                'ends_at' => now()->addDays(1),
+            ],
+            [
+                'author_id' => 3,
+                'name' => 'Quiz 6',
+                'description' => 'This is quiz 6',
+                'starts_at' => now(),
+                'ends_at' => now()->addDays(1),
+            ],
+            
         ];
 
         foreach ($quizes as $quiz) {
