@@ -11,19 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_quiz', function (Blueprint $table) {
+        Schema::create('user_quiz_response', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
+            $table->foreignId('user_quiz_id')
                 ->references('id')
-                ->on('users')
+                ->on('user_quiz')
                 ->constrained();
-            $table->foreignId('quiz_id')->constrained()
+            $table->foreignId('question_id')->constrained()
                 ->references('id')
-                ->on('quizes');
+                ->on('questions');
+            $table->foreignId('answer_id')
+                ->nullable()
+                ->constrained()
+                ->references('id')
+                ->on('answers');
+            $table->text('open_answer')->nullable();
+            $table->boolean('is_correct')->nullable();
             $table->integer('score')->nullable();
+            $table->integer('time')->nullable();
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();
-
         });
     }
 
@@ -32,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_quiz');
+        Schema::dropIfExists('user_quiz_response');
     }
 };

@@ -46,8 +46,8 @@ class Question extends Model
         return $this->hasMany(UserQuestionVote::class);
     }
 
-    public function userQuiz()
+    public function userQuizResponse()
     {
-        return $this->hasMany(UserQuiz::class);
+        return $this->belongsTo(UserQuizResponse::class, 'question_id');
     }
 }
