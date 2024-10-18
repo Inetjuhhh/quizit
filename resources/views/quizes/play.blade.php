@@ -4,7 +4,7 @@
             <h2 class="text-5xl my-5">{{$quiz->name}}</h2>
             <p class="text-2xl my-5">{{$quiz->description}}</p>
         </div>
-        <form action="{{ route('quiz.checkQuestions', $quiz->id)}}" method="POST">
+        <form action="{{ route('userquiz.checkQuestions', $quiz->id)}}" method="POST">
             @csrf
             @foreach($quiz->questions as $question)
                 <div class="border-solid border-2 border-slate-300 rounded-lg p-10 my-5 bg-slate-100">

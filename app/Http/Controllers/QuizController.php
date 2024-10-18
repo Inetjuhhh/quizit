@@ -6,6 +6,7 @@ use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\UserQuiz;
+use App\Models\UserQuizResponse;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -57,62 +58,16 @@ class QuizController extends Controller
         return view('quizes.play')->with('quiz', $quiz);
     }
 
-    public function checkQuestions(string $id)
+    
+
+    public function result(string $id)
     {
-        $quiz = Quiz::with('questions.answers')->findOrFail($id);
-        $questions = $quiz->questions;
-        $answers = request()->except('_token');
-
-        $score = 0;
-        $answerComplete = [];
-        $openAnswers = [];
-
-        foreach($questions as $question) {
-            $submittedAnswerId = $answers[$question->id] ?? null;
-
-            if($question->type->type == 'meerkeuze'){
-                $correctAnswer = $question->answers->firstWhere('is_correct', true);
-
-                if($submittedAnswerId){
-                    $submittedAnswer = $question->answers->find($submittedAnswerId);
-                    $answerComplete[$question->id] = $submittedAnswer;
-
-                    if($correctAnswer && $submittedAnswerId == $correctAnswer->id){
-                        $score++;
-                    }
-
-                    UserQuiz::updateOrCreate([
-                        'user_id' => auth()->id(),
-                        'quiz_id' => $quiz->id,
-                        'question_id' => $question->id,
-                        'answer_id' => $submittedAnswerId,
-                        'is_correct' => $submittedAnswerId == $correctAnswer->id,
-                    ]);
-                }
-            }
-            elseif($question->type->type == 'open'){
-                $openAnswers[$question->id] = $answers[$question->id] ?? null;
-
-                UserQuiz::updateOrCreate([
-                    'user_id' => auth()->id(),
-                    'quiz_id' => $quiz->id,
-                    'question_id' => $question->id,
-                    'open_answer' => $answers[$question->id] ?? null,
-                ]);
-
-                $openAnswers[$question->id] = $submittedAnswerId;
-            }
-        }
-
-        $totalQuestions = $questions->count();
-        $percentage = $totalQuestions > 0 ? round(($score / $totalQuestions) * 100, 1) : 0;
-
-        return view('quizes.result', [
-            'userQuizes' => UserQuiz::where('quiz_id', $quiz->id)->where('user_id', auth()->id())->get(),
-            'score' => $score,
-            'total' => $totalQuestions,
-            'percentage' => $percentage,
-            'quiz' => $quiz,
-        ]);
+    //    return view('quizes.result', [
+    //        'userQuizes' => UserQuiz::where('quiz_id', $id)->where('user_id', auth()->id())->get(),
+    //        'score' => $score,
+    //        'total' => $totalQuestions,
+    //        'percentage' => $percentage,
+    //        'quiz' => $quiz,
+    //    ]);
     }
 }
