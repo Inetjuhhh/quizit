@@ -19,4 +19,8 @@ class Answer extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function userQuiz(){
+        return $this->belongsTo(UserQuiz::class);
+    }
 }

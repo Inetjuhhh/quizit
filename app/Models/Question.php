@@ -45,4 +45,9 @@ class Question extends Model
     {
         return $this->hasMany(UserQuestionVote::class);
     }
+
+    public function userQuiz()
+    {
+        return $this->hasMany(UserQuiz::class);
+    }
 }
