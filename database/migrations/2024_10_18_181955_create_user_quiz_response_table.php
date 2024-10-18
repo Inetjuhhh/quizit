@@ -27,8 +27,6 @@ return new class extends Migration
                 ->on('answers');
             $table->text('open_answer')->nullable();
             $table->boolean('is_correct')->nullable();
-            $table->integer('score')->nullable();
-            $table->integer('time')->nullable();
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();
         });
