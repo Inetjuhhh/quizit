@@ -58,16 +58,6 @@ class QuizController extends Controller
         return view('quizes.play')->with('quiz', $quiz);
     }
 
-    
 
-    public function result(string $id)
-    {
-    //    return view('quizes.result', [
-    //        'userQuizes' => UserQuiz::where('quiz_id', $id)->where('user_id', auth()->id())->get(),
-    //        'score' => $score,
-    //        'total' => $totalQuestions,
-    //        'percentage' => $percentage,
-    //        'quiz' => $quiz,
-    //    ]);
-    }
+
 }

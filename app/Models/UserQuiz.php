@@ -23,7 +23,7 @@ class UserQuiz extends Model
         return $this->belongsTo(Quiz::class, 'quiz_id');
     }
 
-    public function userQuizResonses()
+    public function responses()
     {
         return $this->hasMany(UserQuizResponse::class, 'user_quiz_id');
     }

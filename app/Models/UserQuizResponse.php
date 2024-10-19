@@ -18,14 +18,14 @@ class UserQuizResponse extends Model
         return $this->belongsTo(UserQuiz::class, 'user_quiz_id');
     }
 
-    public function questions()
+    public function question()
     {
-        return $this->hasMany(Question::class, 'question_id');
+        return $this->belongsTo(Question::class, 'question_id');
     }
 
-    public function answers()
+    public function answer()
     {
-        return $this->hasMany(Answer::class, 'answer_id');
+        return $this->belongsTo(Answer::class, 'answer_id');
     }
 
 

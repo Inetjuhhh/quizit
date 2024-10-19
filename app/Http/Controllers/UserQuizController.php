@@ -101,7 +101,33 @@ class UserQuizController extends Controller
         $percentage = $totalQuestions > 0 ? round(($score / $totalQuestions) * 100, 1) : 0;
 
         return redirect()->route('userquizes.index', [
-            'userQuizes' => UserQuiz::where('quiz_id', $quiz->id)->where('user_id', auth()->id())->get(),
+        ]);
+    }
+
+
+    public function result(string $id)
+    {
+        $userQuiz = UserQuiz::where('quiz_id', $id)
+        ->where('user_id', auth()->id())
+        ->with('responses')
+        ->first();
+        $userQuizResponses = UserQuizResponse::where('user_quiz_id', $userQuiz->id)->get();
+
+        if (!$userQuiz) {
+            return redirect()->back()->with('error', 'Gemaakte gebruikersquiz niet gevonden.');
+        }
+
+        $score = $userQuiz->responses->sum('is_correct');
+        $totalQuestions = $userQuiz->responses->count();
+        $percentage = $totalQuestions > 0 ? round(($score / $totalQuestions) * 100, 1) : 0;
+
+        return view('userquiz.result', [
+            'userQuiz' => $userQuiz,
+            'userQuizResponses' => $userQuizResponses,
+            'score' => $score,
+            'total' => $totalQuestions,
+            'percentage' => $percentage,
+
         ]);
     }
 }
