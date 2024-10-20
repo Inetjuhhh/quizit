@@ -26,9 +26,14 @@ class UserQuizSeeder extends Seeder
                     continue;
                 }
                 else{
+
                     $userQuiz = new \App\Models\UserQuiz();
                     $userQuiz->user_id = $user->id;
                     $userQuiz->quiz_id = $quiz->id;
+                    $userQuiz->prepared_by = 3;
+                    $userQuiz->started_at = now()->subDays(rand(0, 10));
+                    $userQuiz->completed_at = now()->addDays(rand(0, 10));
+                    $userQuiz->status = ['pending', 'completed'][rand(0, 1)];
                     $userQuiz->save();
                 }
             }

@@ -20,8 +20,14 @@ return new class extends Migration
             $table->foreignId('quiz_id')->constrained()
                 ->references('id')
                 ->on('quizes');
-            $table->integer('score')->nullable();
+            $table->foreignId('prepared_by')
+                ->references('id')
+                ->on('users')
+                ->constrained();
+            $table->timestamp('started_at')->nullable();
             $table->timestamp('completed_at')->nullable();
+            $table->integer('score')->nullable();
+            $table->enum('status', ['pending', 'completed'])->default('pending')->nullable();
             $table->timestamps();
 
         });
