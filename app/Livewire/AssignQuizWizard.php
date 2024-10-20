@@ -1,21 +1,29 @@
 <?php
 
-namespace App\Http\Livewire;
-
 use Filament\Forms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Concerns\InteractsWithForms;
 use Livewire\Component;
+use App\Models\UserQuiz;
 use App\Models\Quiz;
 use App\Models\User;
-use App\Models\UserQuiz;
 use Filament\Forms\Components\Hidden;
 
-class AssignQuizWizard extends Component
+class AssignQuizWizard extends Component implements HasForms
 {
     use Forms\Concerns\InteractsWithForms;
+
+    public $form;
+
+    public function mount()
+    {
+        $this->form = $this->makeForm()
+            ->schema($this->getFormSchema())
+            ->model(new UserQuiz());
+    }
 
     public function render()
     {
@@ -23,6 +31,7 @@ class AssignQuizWizard extends Component
             'form' => $this->form->render(),
         ]);
     }
+
 
     protected function getFormSchema(): array
     {
@@ -59,8 +68,7 @@ class AssignQuizWizard extends Component
                             ->default(now()->addDays(7))
                             ->required(),
                     ]),
-            ])
-            ->submitAction('Assign Quiz'),
+            ])->submitAction('Assign Quiz'),
         ];
     }
 
@@ -79,9 +87,5 @@ class AssignQuizWizard extends Component
 
         session()->flash('success', 'Quiz successfully assigned to users!');
     }
-
-    protected function getFormModel()
-    {
-        return new UserQuiz();
-    }
 }
+?>

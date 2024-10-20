@@ -16,25 +16,4 @@ use Filament\Forms\Components\Wizard;
 class CreateUserQuiz extends CreateRecord
 {
     protected static string $resource = UserQuizResource::class;
-
-    protected function getFormSchema(): array
-    {
-        return [
-            
-        ];
-    }
-
-    protected function beforeCreate(array $data): array
-    {
-        foreach ($data['attendees'] as $userId) {
-            UserQuiz::create([
-                'user_id'      => $userId,
-                'quiz_id'      => $data['quiz_id'],
-                'started_at'   => $data['started_at'],
-                'completed_at' => $data['completed_at'],
-            ]);
-        }
-
-        return $data;
-    }
 }
