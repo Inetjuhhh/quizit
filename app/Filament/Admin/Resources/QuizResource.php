@@ -29,6 +29,12 @@ class QuizResource extends Resource
     protected static ?string $modelLabel = 'Quiz';
 
     protected static ?string $pluralModelLabel = 'Quizes';
+    
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Beheer');
+    }
+
 
     public static function form(Form $form): Form
     {

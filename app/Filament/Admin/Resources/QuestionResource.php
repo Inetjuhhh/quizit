@@ -37,6 +37,11 @@ class QuestionResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Vragen';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Beheer');
+    }
+
 
     public static function form(Form $form): Form
     {
