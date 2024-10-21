@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\UserQuizResource\Pages;
+use App\Filament\Admin\Resources\UserQuizResource\CreateUserQuiz;
 use App\Filament\Admin\Resources\UserQuizResource\RelationManagers;
 use App\Filament\Resources\UserQuizResource\Pages\AssignUserQuiz;
 use App\Models\UserQuiz;
@@ -33,6 +34,11 @@ class UserQuizResource extends Resource
     protected static ?string $modelLabel = 'Quiz toekennen';
 
     protected static ?string $pluralModelLabel = 'Toegekende quizes';
+
+    public static function getSlug(): string
+    {
+        return 'user-quizes';
+    }
 
     public static function table(Table $table): Table
     {
@@ -85,7 +91,6 @@ class UserQuizResource extends Resource
         return [
             'index' => Pages\ListUserQuizes::route('/'),
             'edit' => Pages\EditUserQuiz::route('/{record}/edit'),
-            'assign-user-quiz' => AssignUserQuiz::route('/assign-user-quiz'),
         ];
     }
 }

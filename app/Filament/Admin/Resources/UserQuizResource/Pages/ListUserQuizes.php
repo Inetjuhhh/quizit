@@ -10,12 +10,4 @@ class ListUserQuizes extends ListRecords
 {
     protected static string $resource = UserQuizResource::class;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            \Filament\Actions\Action::make('Assign Quiz')
-                ->url(route('filament.admin.resources.user-quizzes.assign-user-quiz'))
-                ->label('Ken een quiz toe'),
-        ];
-    }
 }
