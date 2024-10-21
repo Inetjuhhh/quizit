@@ -1,25 +1,23 @@
 <?php
 
-namespace App\Filament\Resources\UserQuizResource\Pages;
+namespace App\Filament\Admin\Resources\UserQuizResource\Pages;
 
-use Filament\Resources\Pages\CreateRecord;
 use App\Filament\Admin\Resources\UserQuizResource;
 use App\Models\Quiz;
 use App\Models\User;
 use Filament\Actions;
-use App\Models\UserQuiz;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Wizard;
+use Filament\Resources\Pages\CreateRecord;
 
 class CreateUserQuiz extends CreateRecord
 {
     protected static string $resource = UserQuizResource::class;
 
-    protected function getFormSchema(): array
-    {
+
+    // protected function getFormSchema(): array
+    // {
     //     return [
     //         Wizard::make([
     //             Wizard\Step::make('quiz_id')
@@ -56,11 +54,9 @@ class CreateUserQuiz extends CreateRecord
     //         ])->submitAction('Assign Quiz'),
     //     ];
     // }
-
     // public function assignQuiz()
     // {
     //     $data = $this->form->getState();
-
     //     foreach ($data['attendees'] as $userId) {
     //         UserQuiz::create([
     //             'user_id'      => $userId,
@@ -69,7 +65,8 @@ class CreateUserQuiz extends CreateRecord
     //             'completed_at' => $data['completed_at'],
     //         ]);
     //     }
-
     //     session()->flash('success', 'Quiz successfully assigned to users!');
-    }
+    // }
+
+
 }
