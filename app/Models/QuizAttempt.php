@@ -5,28 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserQuiz extends Model
+class QuizAttempt extends Model
 {
     use HasFactory;
 
-    protected $table = 'user_quiz';
+    protected $table = 'quiz_attempts';
 
     protected $guarded = [];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
 
     public function quiz()
     {
         return $this->belongsTo(Quiz::class, 'quiz_id');
     }
 
-    public function responses()
+    public function preparedBy()
     {
-        return $this->hasMany(UserQuizResponse::class, 'user_quiz_id');
+        return $this->belongsTo(User::class, 'prepared_by');
     }
 
-
+    public function userQuizAttempt()
+    {
+        return $this->hasMany(UserQuizAttempt::class, 'attempt_id');
+    }
 }

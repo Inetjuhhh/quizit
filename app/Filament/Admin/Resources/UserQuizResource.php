@@ -44,8 +44,6 @@ class UserQuizResource extends Resource
                     Wizard\Step::make('quiz_id')
                         ->label('Kies Quiz')
                         ->schema([
-                            Hidden::make('user_id')
-                                ->default(fn() => auth()->id()),
                             Select::make('quiz_id')
                                 ->label('Quiz')
                                 ->options(Quiz::all()->pluck('name', 'id'))
@@ -54,7 +52,7 @@ class UserQuizResource extends Resource
                     Wizard\Step::make('attendees')
                         ->label('Deelnemers')
                         ->schema([
-                            Select::make('attendees')
+                            Select::make('users')
                                 ->multiple()
                                 ->label('Deelnemers')
                                 ->options(User::all()->pluck('name', 'id'))
@@ -66,7 +64,7 @@ class UserQuizResource extends Resource
                             DateTimePicker::make('started_at')
                                 ->label('Geopend op')
                                 ->default(now())
-                                ->disabled(),
+                                ->required(),
                             DateTimePicker::make('completed_at')
                                 ->label('Sluit op')
                                 ->default(now()->addDays(7))

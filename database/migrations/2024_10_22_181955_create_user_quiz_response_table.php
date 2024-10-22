@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('user_quiz_response', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_quiz_id')
+            $table->foreignId('user_quiz_attempt_id')
                 ->references('id')
-                ->on('user_quiz')
+                ->on('user_quiz_attempt')
                 ->constrained();
             $table->foreignId('question_id')->constrained()
                 ->references('id')

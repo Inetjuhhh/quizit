@@ -25,9 +25,10 @@ class DatabaseSeeder extends Seeder
             QuestionMCSeeder::class,
             QuestionOSeeder::class,
             QuizSeeder::class,
-            UserQuizSeeder::class,
+            QuizAttemptSeeder::class,
+            UserQuizAttemptSeeder::class,
             QuestionCategorySeeder::class,
-            UserQuizResponseSeeder::class,
+            // UserQuizResponseSeeder::class,
         ]);
     }
 }

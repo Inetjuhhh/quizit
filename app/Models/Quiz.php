@@ -29,9 +29,9 @@ class Quiz extends Model
                     ->withPivot('score', 'completed_at');
     }
 
-    public function userQuizes()
+    public function quizAttempt()
     {
-        return $this->hasMany(UserQuiz::class, 'quiz_id');
+        return $this->hasMany(QuizAttempt::class, 'attempt_id');
     }
 
 }
