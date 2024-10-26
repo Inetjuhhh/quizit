@@ -21,8 +21,8 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->constrained();
-            $table->timestamp('started_at')->nullable();
-            $table->timestamp('completed_at')->nullable();
+            $table->timestamp('starting_at')->nullable();
+            $table->timestamp('ending_at')->nullable();
             $table->enum('status', ['pending', 'completed'])->default('pending')->nullable();
             $table->timestamps();
         });

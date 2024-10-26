@@ -7,6 +7,7 @@ use App\Filament\Admin\Resources\QuizAttemptResource\RelationManagers;
 use App\Models\Quiz;
 use App\Models\QuizAttempt;
 use App\Models\User;
+use App\Models\UserQuizAttempt;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Hidden;
@@ -59,22 +60,23 @@ class QuizAttemptResource extends Resource
                 Wizard\Step::make('attendees')
                     ->label('Deelnemers')
                     ->schema([
-                        Select::make('user_quiz_attempt.user_id')
+                        Select::make('users')
                             ->multiple()
                             ->relationship('users', 'name')
                             ->label('Deelnemers')
                             ->options(User::all()->pluck('name', 'id'))
-                            ->required(),
+                            ->required()
+                                ,
                     ]),
                 Wizard\Step::make('period')
                     ->label('Periode')
                     ->schema([
-                        DateTimePicker::make('started_at')
-                            ->label('Geopend op')
+                        DateTimePicker::make('starting_at')
+                            ->label('Openen op')
                             ->default(now())
-                            ->disabled(),
-                        DateTimePicker::make('completed_at')
-                            ->label('Sluit op')
+                            ->required(),
+                        DateTimePicker::make('ending_at')
+                            ->label('Sluiten op')
                             ->default(now()->addDays(7))
                             ->required(),
                     ]),
@@ -88,9 +90,9 @@ class QuizAttemptResource extends Resource
             ->columns([
                 TextColumn::make('quiz.name')
                     ->label('Quiz'),
-                TextColumn::make('started_at')
+                TextColumn::make('starting_at')
                     ->label('Geopend op'),
-                TextColumn::make('completed_at')
+                TextColumn::make('ending_at')
                     ->label('Sluit op'),
                 IconColumn::make('status')
                     ->icon(fn (string $state): string => match ($state) {
@@ -119,7 +121,7 @@ class QuizAttemptResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            QuizAttemptResource\RelationManagers\UsersRelationManager::class,
         ];
     }
 

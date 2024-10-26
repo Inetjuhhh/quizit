@@ -23,8 +23,8 @@ class QuizAttemptSeeder extends Seeder
                 $quizAttempt = new \App\Models\QuizAttempt();
                 $quizAttempt->quiz_id = $quiz->id;
                 $quizAttempt->prepared_by = rand(1, 10);
-                $quizAttempt->started_at = now()->subDays(rand(0, 10));
-                $quizAttempt->completed_at = now()->addDays(rand(0, 10));
+                $quizAttempt->starting_at = now()->subDays(rand(0, 10));
+                $quizAttempt->ending_at = now()->addDays(rand(0, 10));
                 $quizAttempt->status = ['pending', 'completed'][rand(0, 1)];
                 $quizAttempt->save();
             }
