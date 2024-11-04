@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\QuizAttemptResource\RelationManagers;
 
+use App\Filament\Admin\Actions\DetachActionBelongsTo;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -45,8 +46,9 @@ class UsersRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
+                //Detach user from quiz attempt not from user table
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                DetachActionBelongsTo::make()->label('Ontkoppel student'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

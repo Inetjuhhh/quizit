@@ -27,9 +27,9 @@ class User extends Authenticatable
                     ->withPivot('score', 'completed_at');
     }
 
-    public function userQuizes()
+    public function userQuizAttempt()
     {
-        return $this->hasMany(UserQuiz::class, 'user_id');
+        return $this->hasMany(UserQuizAttempt::class);
     }
 
     public function userQuestionVote()
