@@ -6,7 +6,7 @@
 
 # QuizIt 
 QuizIt is an application you can use to make whatever quiz you want to make. With the admin panel you can easily add questions and answers to your database. You can attach a category to your questions. In a quiz you can add the prefered questions. 
-In the user view your students or pupils can execute quizes, automaticly see their scores and review the questions. They also manage their past scores. 
+In the user view your students or pupils can execute quizes, automaticly see their scores and review the questions. They also manage their past scores. Have fun!
 
 ## Documentation
 In this 'README.md`:
