@@ -15,8 +15,8 @@
                     @foreach ($executedUserQuizAttempts as $executedUserQuizAttempt)
                         <tr class="border-b border-gray-200 dark:border-gray-700 text-xl">
                             <td scope="row" class="hover:bg-gray-900 px-6 py-3 text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800 border-r"><a href="{{ route('userquiz.result', ['id' => $executedUserQuizAttempt->id])}}" class="text-slate-500" >{{$executedUserQuizAttempt->attempt->quiz->name}}</a></td>
-                            {{-- <td scope="row" class="px-6 py-3 text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800 border-r">{{$userQuiz->attempt->score}}</td>
-                            <td scope="row" class="px-6 py-3 text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">{{$userQuiz->completed_at}}</td> --}}
+                            <td scope="row" class="px-6 py-3 text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800 border-r">{{$score}} / {{$numberOfQuestions}} ({{$percentage}}%)</td>
+                            <td scope="row" class="px-6 py-3 text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">{{$executedUserQuizAttempt->completed_a}}</td>
                         </tr>
                     @endforeach
                 </tbody>

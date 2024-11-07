@@ -20,12 +20,18 @@ class UserQuizController extends Controller
             $userQuizResponses = UserQuizResponse::where('user_quiz_attempt_id', $userQuizAttempt->id)->get();
             if ($userQuizResponses->count() > 0) {
                 $executedUserQuizAttempts[] = $userQuizAttempt;
+                $numberOfQuestions = $userQuizAttempt->attempt->quiz->questions->count();
+                $score = $userQuizAttempt->responses->sum('is_correct');
+                $percentage = $numberOfQuestions > 0 ? round(($score / $numberOfQuestions) * 100, 1) : 0;
             }
         }
 
         return view('userquiz.index')
             ->with([
                 'executedUserQuizAttempts' => $executedUserQuizAttempts,
+                'numberOfQuestions' => $numberOfQuestions,
+                'score' => $score,
+                'percentage' => $percentage,
             ]);
     }
 
