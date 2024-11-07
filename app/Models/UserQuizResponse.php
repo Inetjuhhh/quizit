@@ -13,9 +13,9 @@ class UserQuizResponse extends Model
 
     protected $guarded = [];
 
-    public function userQuiz()
+    public function userQuizAttempt()
     {
-        return $this->belongsTo(UserQuiz::class, 'user_quiz_id');
+        return $this->belongsTo(UserQuizAttempt::class, 'user_quiz_attempt_id');
     }
 
     public function question()

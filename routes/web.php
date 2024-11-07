@@ -21,10 +21,10 @@ Route::get('/userpage', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/quizes/index', [QuizController::class, 'index'])->name('quizes.index');
-    Route::get('/quiz/{id}', [QuizController::class, 'show'])->name('quiz.show');
-    Route::get('/quiz/{id}/play', [QuizController::class, 'play'])->name('quiz.play');
+    Route::get('/quiz/{id}/attempt/{user_quiz_attempt_id}', [QuizController::class, 'show'])->name('quiz.show');
+    Route::get('/quiz/{id}/attempt_id/{user_quiz_attempt_id}', [QuizController::class, 'play'])->name('quiz.play');
     Route::get('/userquizes/index', [UserQuizController::class, 'index'])->name('userquizes.index');
-    Route::post('/userquiz/{id}/checkQuestions', [UserQuizController::class, 'checkQuestions'])->name('userquiz.checkQuestions');
+    Route::post('/userquiz/{id}/attempt/{user_quiz_attempt_id}', [UserQuizController::class, 'checkQuestions'])->name('userquiz.checkQuestions');
     Route::get('/userquiz/{id}/result', [UserQuizController::class, 'result'])->name('userquiz.result');
 });
 

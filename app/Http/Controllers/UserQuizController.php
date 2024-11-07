@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Quiz;
 use App\Models\UserQuiz;
+use App\Models\UserQuizAttempt;
 use App\Models\UserQuizResponse;
 use Illuminate\Http\Request;
 
@@ -11,37 +12,26 @@ class UserQuizController extends Controller
 {
     public function index()
     {
-        $userQuizes = [];
-        $allUserQuizes = UserQuiz::where('user_id', auth()->id())->get();
+        $executedUserQuizAttempts = [];
+        $userQuizAttempts = UserQuizAttempt::where('user_id', auth()->id())->get();
 
-        foreach ($allUserQuizes as $oneUserQuiz) {
-            $userId = $oneUserQuiz->user_id;
-            $quizId = $oneUserQuiz->quiz_id;
-
-            $exists = false;
-
-            foreach ($userQuizes as $userQuiz) {
-                if ($userQuiz->user_id === $userId && $userQuiz->quiz_id === $quizId) {
-                    $exists = true;
-                    break;
-                }
-            }
-
-            if (!$exists) {
-                $userQuizes[] = $oneUserQuiz;
+        foreach ($userQuizAttempts as $userQuizAttempt) {
+            $userQuizResponses = UserQuizResponse::where('user_quiz_attempt_id', $userQuizAttempt->id)->get();
+            if ($userQuizResponses->count() > 0) {
+                $executedUserQuizAttempts[] = $userQuizAttempt;
             }
         }
 
-
         return view('userquiz.index')
             ->with([
-                'userQuizes' => $userQuizes,
+                'executedUserQuizAttempts' => $executedUserQuizAttempts,
             ]);
     }
 
-    public function checkQuestions(string $id)
+    public function checkQuestions(string $id, string $userQuizAttempt)
     {
         $quiz = Quiz::with('questions.answers')->findOrFail($id);
+        $userQuizAttempt = UserQuizAttempt::findOrFail($userQuizAttempt);
         $questions = $quiz->questions;
         $answers = request()->except('_token');
 
@@ -63,32 +53,20 @@ class UserQuizController extends Controller
                         $score++;
                     }
 
-                    UserQuiz::updateOrCreate([
-                        'user_id' => auth()->id(),
-                        'quiz_id' => $quiz->id,
-                        'completed_at' => now()
-                    ]);
-                    $userQuiz = UserQuiz::where('user_id', auth()->id())->where('quiz_id', $quiz->id)->first();
                     UserQuizResponse::updateOrCreate([
-                        'user_quiz_id' => $userQuiz->id,
+                        'user_quiz_attempt_id' => $userQuizAttempt->id,
                         'question_id' => $question->id,
                         'answer_id' => $submittedAnswerId,
                         'is_correct' => $submittedAnswerId == $correctAnswer->id,
+                        'completed_at' => now(),
                     ]);
                 }
             }
             elseif($question->type->type == 'open'){
                 $openAnswers[$question->id] = $answers[$question->id] ?? null;
 
-                UserQuiz::updateOrCreate([
-                    'user_id' => auth()->id(),
-                    'quiz_id' => $quiz->id,
-                    'score' => $score,
-                    'completed_at' => now(),
-                ]);
-                $userQuiz = UserQuiz::where('user_id', auth()->id())->where('quiz_id', $quiz->id)->first();
                 UserQuizResponse::updateOrCreate([
-                    'user_quiz_id' => $userQuiz->id,
+                    'user_quiz_attempt_id' => $userQuizAttempt->id,
                     'question_id' => $question->id,
                     'open_answer' => $answers[$question->id] ?? null,
                     'completed_at' => now(),
@@ -107,22 +85,19 @@ class UserQuizController extends Controller
 
     public function result(string $id)
     {
-        $userQuiz = UserQuiz::where('quiz_id', $id)
-        ->where('user_id', auth()->id())
-        ->with('responses')
-        ->first();
-        $userQuizResponses = UserQuizResponse::where('user_quiz_id', $userQuiz->id)->get();
+        $userQuizAttempt = UserQuizAttempt::findOrFail($id);
+        $userQuizResponses = UserQuizResponse::where('user_quiz_attempt_id', $userQuizAttempt->id)->get();
 
-        if (!$userQuiz) {
+        if (!$userQuizAttempt) {
             return redirect()->back()->with('error', 'Gemaakte gebruikersquiz niet gevonden.');
         }
 
-        $score = $userQuiz->responses->sum('is_correct');
-        $totalQuestions = $userQuiz->responses->count();
+        $score = $userQuizAttempt->responses->sum('is_correct');
+        $totalQuestions = $userQuizAttempt->responses->count();
         $percentage = $totalQuestions > 0 ? round(($score / $totalQuestions) * 100, 1) : 0;
 
         return view('userquiz.result', [
-            'userQuiz' => $userQuiz,
+            'userQuizAttempt' => $userQuizAttempt,
             'userQuizResponses' => $userQuizResponses,
             'score' => $score,
             'total' => $totalQuestions,

@@ -2,8 +2,8 @@
     <x-slot name="header">
 
         <div class="border-solid border-2 border-slate-300 rounded-lg p-10">
-            <h2 class="text-7xl my-5">{{$userQuiz->quiz->name}}</h1>
-            <p class="text-2xl my-5">{{$userQuiz->quiz->description}}</p>
+            <h2 class="text-7xl my-5">{{$userQuizAttempt->attempt->quiz->name}}</h1>
+            <p class="text-2xl my-5">{{$userQuizAttempt->attempt->quiz->description}}</p>
         </div>
         <div class="border-solid border-2 border-slate-300 rounded-lg p-10 my-5 bg-slate-100">
             <h3 class="text-4xl my-5">Resultaten</h3>

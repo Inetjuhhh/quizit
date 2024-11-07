@@ -6,6 +6,7 @@ use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\UserQuiz;
+use App\Models\UserQuizAttempt;
 use App\Models\UserQuizResponse;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,13 @@ class QuizController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $quizes = Quiz::all();
+        $userQuizAttempts = UserQuizAttempt::where('user_id', $user->id)->get();
+
+        return view('quizes.index')
+            ->with('user', $user)
+            ->with('userQuizAttempts', $userQuizAttempts);
+
+        //
         $userQuizes = $user->quizes;
         $completedQuizes = [];
 
@@ -34,9 +41,10 @@ class QuizController extends Controller
             ->with('completedQuizes', $completedQuizes);
         }
 
-    public function show(string $id)
+    public function show(string $id, string $userQuizAttemptId)
     {
         $quiz = Quiz::findOrFail($id);
+        $userQuizAttempt = UserQuizAttempt::findOrFail($userQuizAttemptId);
         $questions = $quiz->questions;
         $categories = [];
         foreach ($questions as $question) {
@@ -49,13 +57,17 @@ class QuizController extends Controller
         }
         return view('quizes.show')
             ->with('quiz', $quiz)
+            ->with('userQuizAttempt', $userQuizAttempt)
             ->with('categories', $categories);
     }
 
-    public function play(string $id)
+    public function play(string $id, string $userQuizAttemptId)
     {
         $quiz = Quiz::findOrFail($id);
-        return view('quizes.play')->with('quiz', $quiz);
+        $userQuizAttempt = UserQuizAttempt::findOrFail($userQuizAttemptId);
+        return view('quizes.play')
+            ->with('quiz', $quiz)
+            ->with('userQuizAttempt', $userQuizAttempt);
     }
 
 
