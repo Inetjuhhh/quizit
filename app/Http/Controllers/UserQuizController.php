@@ -6,6 +6,7 @@ use App\Models\Quiz;
 use App\Models\UserQuiz;
 use App\Models\UserQuizAttempt;
 use App\Models\UserQuizResponse;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserQuizController extends Controller
@@ -39,6 +40,10 @@ class UserQuizController extends Controller
         $answerComplete = [];
         $openAnswers = [];
 
+        if ($userQuizAttempt) {
+            $userQuizAttempt->completed_at = Carbon::now();
+            $userQuizAttempt->save();
+        }
         foreach($questions as $question) {
             $submittedAnswerId = $answers[$question->id] ?? null;
 

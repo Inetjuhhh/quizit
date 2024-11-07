@@ -20,10 +20,8 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->constrained();
-
-
+            $table->timestamp('completed_at')->nullable();
             $table->timestamps();
-
         });
     }
 
