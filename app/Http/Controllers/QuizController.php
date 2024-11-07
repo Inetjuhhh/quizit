@@ -19,25 +19,21 @@ class QuizController extends Controller
     {
         $user = auth()->user();
         $userQuizAttempts = UserQuizAttempt::where('user_id', $user->id)->get();
+        $quizes = Quiz::all();
 
-        return view('quizes.index')
-            ->with('user', $user)
-            ->with('userQuizAttempts', $userQuizAttempts);
-
-        //
-        $userQuizes = $user->quizes;
         $completedQuizes = [];
 
-        foreach ($userQuizes as $userQuiz) {
-            $completedQuizes[$userQuiz->id] = [
-                'score' => $userQuiz->pivot->score,
-                'completed_at' => $userQuiz->pivot->completed_at
+        foreach ($userQuizAttempts as $userQuizAttempt) {
+            $completedQuizes[$userQuizAttempt->id] = [
+                'score' => $userQuizAttempt->responses->sum('is_correct'),
+                'completed_at' => $userQuizAttempt->completed_at
             ];
         }
 
         return view('quizes.index')
             ->with('quizes', $quizes)
             ->with('user', $user)
+            ->with('userQuizAttempts', $userQuizAttempts)
             ->with('completedQuizes', $completedQuizes);
         }
 

@@ -12,22 +12,22 @@
             <tbody scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 border-r">
                 @foreach ($userQuizAttempts as $userQuizAttempt)
                     <tr class="my-5 border-b">
-                        {{-- @if (array_key_exists($quiz->id, $completedQuizes))
+                        @if (array_key_exists($userQuizAttempt->id, $completedQuizes))
                             <!-- Quiz is completed -->
-                            <td class="px-5 py-5 text-red-500 text-3xl">{{ $quiz->name }}</td>
+                            <td class="px-5 py-5 text-red-500 text-3xl">{{ $userQuizAttempt->attempt->quiz->name }}</td>
                             <td class="px-5 py-5 text-red-500">
                                 Deze quiz is al gemaakt. <br>
-                                Score: {{ $completedQuizes[$quiz->id]['score'] }} <br>
-                                Voltooid op: {{ \Carbon\Carbon::parse($completedQuizes[$quiz->id]['completed_at'])->format('d-m-Y H:i') }}
+                                Score: {{ $userQuizAttempt->responses->sum('is_correct') }} <br>
+                                Voltooid op: {{ \Carbon\Carbon::parse($userQuizAttempt->completed_at)->format('d-m-Y H:i') }}
                             </td>
-                        @else --}}
+                        @else
                             <tr class="py-10">
                                 <td class="border-r"><a class="py-2 pr-9 pl-5 w-48 my-10 text-green-400 text-slate-500 text-3xl hover:text-white-500 hover:bg-gray-200 hover:rounded" href="{{ route('quiz.show', ['id' => $userQuizAttempt->attempt->quiz->id, 'user_quiz_attempt_id' => $userQuizAttempt->id]) }}">
                                     {{ $userQuizAttempt->attempt->quiz->name }}
                                 </a></td>
                                 <td class="py-10 px-5 text-green-400">Deze quiz is beschikbaar.</td>
                             </tr>
-                        {{-- @endif --}}
+                        @endif
                     </tr>
                     @endforeach
             </tbody>
