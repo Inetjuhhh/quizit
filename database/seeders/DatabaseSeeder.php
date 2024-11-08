@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             QuizAttemptSeeder::class,
             UserQuizAttemptSeeder::class,
             QuestionCategorySeeder::class,
-            // UserQuizResponseSeeder::class,
+            UserQuizResponseSeeder::class,
         ]);
     }
 }
