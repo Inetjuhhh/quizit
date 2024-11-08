@@ -24,10 +24,12 @@ class QuizController extends Controller
         $completedQuizes = [];
 
         foreach ($userQuizAttempts as $userQuizAttempt) {
-            $completedQuizes[$userQuizAttempt->id] = [
-                'score' => $userQuizAttempt->responses->sum('is_correct'),
-                'completed_at' => $userQuizAttempt->completed_at
-            ];
+            if($userQuizAttempt->completed_at) {
+                $completedQuizes[$userQuizAttempt->id] = [
+                    'score' => $userQuizAttempt->responses->sum('is_correct'),
+                    'completed_at' => $userQuizAttempt->completed_at
+                ];
+            }
         }
 
         return view('quizes.index')
