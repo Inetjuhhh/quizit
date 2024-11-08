@@ -21,8 +21,6 @@ class UserQuizController extends Controller
             if ($userQuizResponses->count() > 0) {
                 $executedUserQuizAttempts[] = $userQuizAttempt;
                 $numberOfQuestions = $userQuizAttempt->attempt->quiz->questions->count();
-                $score = $userQuizAttempt->responses->sum('is_correct');
-                $percentage = $numberOfQuestions > 0 ? round(($score / $numberOfQuestions) * 100, 1) : 0;
             }
         }
 
@@ -30,8 +28,6 @@ class UserQuizController extends Controller
             ->with([
                 'executedUserQuizAttempts' => $executedUserQuizAttempts,
                 'numberOfQuestions' => $numberOfQuestions,
-                'score' => $score,
-                'percentage' => $percentage,
             ]);
     }
 

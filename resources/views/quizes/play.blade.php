@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="border-solid border-2 border-slate-300 rounded-lg p-10 bg-slate-100 ">
+        <div class="border-solid border-2 border-slate-300 rounded-lg p-10 bg-slate-100  ">
             <h2 class="text-5xl my-5">{{$quiz->name}}</h2>
             <p class="text-2xl my-5">{{$quiz->description}}</p>
         </div>

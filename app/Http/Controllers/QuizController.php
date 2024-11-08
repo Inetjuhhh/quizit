@@ -26,7 +26,6 @@ class QuizController extends Controller
         foreach ($userQuizAttempts as $userQuizAttempt) {
             if($userQuizAttempt->completed_at) {
                 $completedQuizes[$userQuizAttempt->id] = [
-                    'score' => $userQuizAttempt->responses->sum('is_correct'),
                     'completed_at' => $userQuizAttempt->completed_at
                 ];
             }

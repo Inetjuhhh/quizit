@@ -29,7 +29,7 @@
             @endisset
 
             <!-- Page Content -->
-            <main class="flex-grow">
+            <main class="flex-grow dark:bg-gray-500">
                 {{ $slot }}
             </main>
             @include('layouts.footer')
