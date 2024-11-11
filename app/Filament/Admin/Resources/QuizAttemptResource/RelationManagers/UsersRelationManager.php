@@ -3,10 +3,12 @@
 namespace App\Filament\Admin\Resources\QuizAttemptResource\RelationManagers;
 
 use App\Filament\Admin\Actions\DetachActionBelongsTo;
+use App\Filament\Admin\Actions\OpenResultsToUserQuizAttempt;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -20,7 +22,6 @@ class UsersRelationManager extends RelationManager
     protected static ?string $modelLabel = 'Student';
 
     protected static ?string $pluralModelLabel = 'Studenten';
-
 
     public function form(Form $form): Form
     {
@@ -38,6 +39,7 @@ class UsersRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('')
             ])
             ->filters([
                 //
@@ -46,9 +48,18 @@ class UsersRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                //Detach user from quiz attempt not from user table
+                Action::make('viewResponses')
+                ->label('Bekijk antwoorden')
+                ->action(function ($record, $livewire) {
+                    // Open the custom modal for UserQuizResponses with the specific user_quiz_attempt_id
+                    $livewire->mount('UserQuizResponsePage', ['userQuizAttempt' => $record]);
+                })
+                ->modalButton('Open')
+                ->modalHeading('Gebruiker antwoorden')
+                ->modalWidth('4xl'),
                 Tables\Actions\EditAction::make(),
                 DetachActionBelongsTo::make()->label('Ontkoppel student'),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

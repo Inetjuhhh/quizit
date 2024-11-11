@@ -90,6 +90,9 @@ class QuizAttemptResource extends Resource
             ->columns([
                 TextColumn::make('quiz.name')
                     ->label('Quiz'),
+                #TODO: get user.name from the prepared_by (is foreign key to user.id)
+                TextColumn::make('prepared_by')
+                    ->label('Klaargezet door'),
                 TextColumn::make('starting_at')
                     ->label('Geopend op'),
                 TextColumn::make('ending_at')
