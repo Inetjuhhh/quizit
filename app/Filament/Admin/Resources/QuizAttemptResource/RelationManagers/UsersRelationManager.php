@@ -50,12 +50,8 @@ class UsersRelationManager extends RelationManager
             ->actions([
                 Action::make('viewResponses')
                 ->label('Bekijk antwoorden')
-                // ->action(function ($record, $livewire) {
-
-                // })
                 ->url(function($record){
                     return route('filament.admin.resources.quiz-attempts.response', $record->id);
-
                 })
                 ->color('info')
                 ->modalHeading('Gebruiker antwoorden')

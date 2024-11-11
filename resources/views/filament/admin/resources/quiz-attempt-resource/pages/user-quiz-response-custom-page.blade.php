@@ -1,3 +1,4 @@
 <x-filament-panels::page>
-    {{$record->responses}}
+    @livewire('quiz-attempt.user-quiz-response', ['record' => $record])
+    {{-- {{$record->responses}} --}}
 </x-filament-panels::page>
