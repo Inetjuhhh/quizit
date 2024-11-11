@@ -50,11 +50,14 @@ class UsersRelationManager extends RelationManager
             ->actions([
                 Action::make('viewResponses')
                 ->label('Bekijk antwoorden')
-                ->action(function ($record, $livewire) {
-                    // Open the custom modal for UserQuizResponses with the specific user_quiz_attempt_id
-                    $livewire->mount('UserQuizResponsePage', ['userQuizAttempt' => $record]);
+                // ->action(function ($record, $livewire) {
+
+                // })
+                ->url(function($record){
+                    return route('filament.admin.resources.quiz-attempts.response', $record->id);
+
                 })
-                ->modalButton('Open')
+                ->color('info')
                 ->modalHeading('Gebruiker antwoorden')
                 ->modalWidth('4xl'),
                 Tables\Actions\EditAction::make(),

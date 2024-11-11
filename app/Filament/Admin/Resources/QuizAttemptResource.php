@@ -134,6 +134,7 @@ class QuizAttemptResource extends Resource
             'index' => Pages\ListQuizAttempts::route('/'),
             'create' => Pages\CreateQuizAttempt::route('/create'),
             'edit' => Pages\EditQuizAttempt::route('/{record}/edit'),
+            'response' => Pages\UserQuizResponseCustomPage::route('/{record}/response'),
         ];
     }
 }
