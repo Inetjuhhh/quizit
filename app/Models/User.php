@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public function userQuizAttempt()
     {
-        return $this->hasMany(UserQuizAttempt::class);
+        return $this->hasMany(UserQuizAttempt::class, 'user_id');
     }
 
     public function userQuestionVote()

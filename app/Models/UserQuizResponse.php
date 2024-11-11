@@ -13,17 +13,6 @@ class UserQuizResponse extends Model
 
     protected $guarded = [];
 
-    protected static ?string $model = UserQuizResponse::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-    protected static ?string $navigationLabel = 'Gebruikers Quiz antwoorden';
-
-    protected static ?string $modelLabel = 'Responses';
-
-    protected static ?string $pluralModelLabel = 'Responses';
-
-
     public function userQuizAttempt()
     {
         return $this->belongsTo(UserQuizAttempt::class, 'user_quiz_attempt_id');
