@@ -15,6 +15,7 @@ class UserQuizController extends Controller
     {
         $executedUserQuizAttempts = [];
         $userQuizAttempts = UserQuizAttempt::where('user_id', auth()->id())->get();
+        $numberOfQuestions = 0;
 
         foreach ($userQuizAttempts as $userQuizAttempt) {
             $userQuizResponses = UserQuizResponse::where('user_quiz_attempt_id', $userQuizAttempt->id)->get();
