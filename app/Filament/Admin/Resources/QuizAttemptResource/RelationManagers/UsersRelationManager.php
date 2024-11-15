@@ -49,9 +49,21 @@ class UsersRelationManager extends RelationManager
             ])
             ->actions([
                 Action::make('viewResponses')
-                ->label('Bekijk antwoorden')
+                // ->label(function($record){
+                //     dd($record->completed_at);
+                // })
+                ->label(function($record){
+                    if($record->completed_at != null){
+                        return 'Bekijk antwoorden';
+                    }
+                    else{
+                        return '';
+                    }
+                })
                 ->url(function($record){
-                    return route('filament.admin.resources.quiz-attempts.response', $record->id);
+                    if($record->completed_at != null){
+                        return route('filament.admin.resources.quiz-attempts.response', $record->id);
+                    }
                 })
                 ->color('info')
                 ->modalHeading('Gebruiker antwoorden')
