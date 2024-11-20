@@ -38,7 +38,6 @@
                 </div>
                 @endforeach
             </ul>
-
         </div>
 
     </x-slot>
