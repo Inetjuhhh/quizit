@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Validation\ValidationException;
 
 class AnswersRelationManager extends RelationManager
 {
@@ -44,8 +45,32 @@ class AnswersRelationManager extends RelationManager
                     ->maxLength(255),
                 Forms\Components\Toggle::make('is_correct')
                     ->label('Is juist?')
+                    ->visible(function () {
+                        return in_array($this->ownerRecord->type_id, ['meerkeuze']);
+                    })
+                ]);
+            // ->rules([
+            //     'answer' => function ($attribute, $value, $fail) {
+            //         $question = $this->ownerRecord;
 
-            ]);
+            //         if ($question->type_id === 'open') {
+            //             $existingAnswers = \App\Models\Answer::where('question_id', $question->id)->count();
+            //             if ($existingAnswers >= 1) {
+            //                 $fail('Er mag slechts één antwoord bestaan voor een open vraag.');
+            //             }
+            //         }
+            //     },
+            // ]);
+            // ->beforeSave(function ($record) {
+            //     if ($record->type_id === 'open') {
+            //         $existingAnswerCount = \App\Models\Answer::where('question_id', $record->id)->count();
+            //         if ($existingAnswerCount >= 1) {
+            //             throw ValidationException::withMessages([
+            //                 'answer' => 'Er mag slechts één antwoord bestaan voor een open vraag.',
+            //             ]);
+            //         }
+            //     }
+            // });
     }
 
     public function table(Table $table): Table
@@ -67,7 +92,21 @@ class AnswersRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->visible(function () {
+                        $question = $this->ownerRecord;
+
+                        if ($question->type->type == 'meerkeuze') {
+                            return true;
+                        }
+
+                        if ($question->type->type == 'open') {
+                            $existingAnswers = \App\Models\Answer::where('question_id', $question->id)->count();
+                            return $existingAnswers === 0;
+                        }
+
+                        return false;
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

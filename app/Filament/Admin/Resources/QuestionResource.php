@@ -100,7 +100,10 @@ class QuestionResource extends Resource
                 Tables\Columns\TextColumn::make('question')
                     ->searchable()
                     ->label('Vraag'),
-                Tables\Columns\TextColumn::make('category.name')
+                Tables\Columns\TextColumn::make('type.type')
+                    ->label('Type'),
+                Tables\Columns\TextColumn::make('categories.name')
+                    ->separator(', ')
                     ->label('Categorie'),
             ])
             ->filters([
