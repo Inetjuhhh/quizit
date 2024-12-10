@@ -15,20 +15,23 @@ class UserQuizController extends Controller
     {
         $executedUserQuizAttempts = [];
         $userQuizAttempts = UserQuizAttempt::where('user_id', auth()->id())->get();
-        $numberOfQuestions = '';
+        $numberOfQuestions = [];
 
         foreach ($userQuizAttempts as $userQuizAttempt) {
-            $userQuizResponses = UserQuizResponse::where('user_quiz_attempt_id', $userQuizAttempt->id)->get();
-            if ($userQuizResponses->count() > 0) {
+            if($userQuizAttempt->completed_at !== null){
                 $executedUserQuizAttempts[] = $userQuizAttempt;
-                $numberOfQuestions = $userQuizAttempt->attempt->quiz->questions->count();
+                $correct = $userQuizAttempt->responses->where('is_correct', true)->count();
+                $numberOfQuestions = $userQuizAttempt->responses->count();
+                $percentage = $numberOfQuestions > 0 ? round(($correct / $numberOfQuestions) * 100, 1) : 0;
             }
+
         }
 
         return view('userquiz.index')
             ->with([
                 'executedUserQuizAttempts' => $executedUserQuizAttempts,
                 'numberOfQuestions' => $numberOfQuestions,
+                'percentage' => $percentage,
             ]);
     }
 
