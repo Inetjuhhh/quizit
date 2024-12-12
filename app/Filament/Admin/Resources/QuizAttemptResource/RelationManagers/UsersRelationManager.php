@@ -6,6 +6,7 @@ use App\Filament\Admin\Actions\DetachActionBelongsTo;
 use App\Filament\Admin\Actions\OpenResultsToUserQuizAttempt;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
@@ -49,9 +50,6 @@ class UsersRelationManager extends RelationManager
             ])
             ->actions([
                 Action::make('viewResponses')
-                // ->label(function($record){
-                //     dd($record->completed_at);
-                // })
                 ->label(function($record){
                     if($record->completed_at != null){
                         return 'Bekijk antwoorden';
@@ -60,9 +58,9 @@ class UsersRelationManager extends RelationManager
                         return '';
                     }
                 })
-                ->url(function($record){
+                ->url(function($record, Get $get){
                     if($record->completed_at != null){
-                        return route('filament.admin.resources.quiz-attempts.response', $record->id);
+                        return route('filament.admin.resources.quiz-attempts.response', $record->attempt_id);
                     }
                 })
                 ->color('info')
