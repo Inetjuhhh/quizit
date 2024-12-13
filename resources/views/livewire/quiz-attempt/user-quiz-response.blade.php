@@ -1,13 +1,13 @@
 <div>
     <div class="quiz-info">
-        <h2 class="text-xl">Resultaten van {{$record->user->name}} voor {{$record->attempt->quiz->name}}</h2>
+        <h2 class="text-xl mb-3">Resultaten van {{$record->user->name}} voor {{$record->attempt->quiz->name}}</h2>
         @if($record->completed_at)
-            <p>Quiz voltooid op {{$record->completed_at}}</p>
+            <p class="italic">Quiz voltooid op {{$record->completed_at}}</p>
         @else
-            <p>Quiz nog niet voltooid</p>
+            <p class="italic">Quiz nog niet voltooid</p>
         @endif
     </div>
-    <div class="relative overflow-x-auto shadow-md rounded-lg">
+    <div class="mt-5 relative overflow-x-auto shadow-md rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
