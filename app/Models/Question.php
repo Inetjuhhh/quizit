@@ -11,9 +11,15 @@ class Question extends Model
     protected $table = 'questions';
     protected $guarded = [];
 
+    //if question_type = 1 then public function answers, if question_type = 4 then public function answer
     public function answers()
     {
         return $this->hasMany(Answer::class);
+    }
+
+    public function answer()
+    {
+        return $this->hasOne(Answer::class);
     }
 
     public function user()

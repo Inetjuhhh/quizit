@@ -30,10 +30,18 @@
                             @endif
                         </td>
                         <td class="px-6 py-4">
-
-
+                            <?php
+                                if($response->question->type->type == 'meerkeuze') {
+                                    $correctAnswer = $response->question->answers->where('is_correct', 1)->first();
+                                    echo $correctAnswer->answer;
+                                } elseif($response->question->type->type == 'open') {
+                                    echo $response->question->answer->answer;
+                                } else {
+                                    echo 'er is geen antwoord ingesteld';
+                                }
+                            ?>
                         </td>
-                        <td>
+                        <td class="px-6 py-4">
 
                             @if($response->question->type->type !== 'meerkeuze')
                                 @livewire('quiz-attempt.response-open-question-score', ['response' => $response])
