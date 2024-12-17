@@ -21,4 +21,9 @@ class UserQuestionVote extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function klas()
+    {
+        return $this->belongsTo(Klas::class);
+    }
 }
