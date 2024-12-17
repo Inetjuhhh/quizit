@@ -12,8 +12,9 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">Vraag</th>
-                    <th scope="col" class="px-6 py-3">Antwoord</th>
-                    <th scope="col" class="px-6 py-3">Correct</th>
+                    <th scope="col" class="px-6 py-3">Jouw Antwoord</th>
+                    <th scope="col" class="px-6 py-3">Correcte antwoord</th>
+                    <th scope="col" class="px-6 py-3">Score</th>
                 </tr>
             </thead>
 
@@ -29,14 +30,25 @@
                             @endif
                         </td>
                         <td class="px-6 py-4">
-                            <x-button-score
-                            :answerText="$response->open_answer"
-                            :isCorrect="$response->is_correct"
-                            :buttonText="$response->is_correct
-                                ? 1
-                                : ($response->is_correct === 0 ? 0 : 'Deze vraag wordt beoordeeld door de docent.')"
-                        />
+
+
                         </td>
+                        <td>
+
+                            @if($response->question->type->type !== 'meerkeuze')
+                                @livewire('quiz-attempt.response-open-question-score', ['response' => $response])
+                            @else
+
+                                <x-button-score
+                                {{-- :answerText="$response->open_answer" --}}
+                                :isCorrect="$response->is_correct"
+                                :buttonText="$response->is_correct
+                                    ? 1
+                                    : ($response->is_correct === 0 ? 0 : '[X]')"
+                            />
+                            @endif
+                        </td>
+
                     </tr>
                 @endforeach
             </tbody>

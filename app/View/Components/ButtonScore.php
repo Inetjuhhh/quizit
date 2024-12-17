@@ -12,9 +12,8 @@ class ButtonScore extends Component
     public $isCorrect;
     public $buttonText;
 
-    public function __construct($answerText, $isCorrect, $buttonText)
+    public function __construct($isCorrect, $buttonText)
     {
-        $this->answerText = $answerText;
         $this->isCorrect = $isCorrect;
         $this->buttonText = $buttonText;
     }
