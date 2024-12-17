@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources\QuizAttemptResource\RelationManagers;
 
 use App\Filament\Admin\Actions\DetachActionBelongsTo;
 use App\Filament\Admin\Actions\OpenResultsToUserQuizAttempt;
+use App\Models\UserQuizAttempt;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
@@ -60,7 +61,8 @@ class UsersRelationManager extends RelationManager
                 })
                 ->url(function($record, Get $get){
                     if($record->completed_at != null){
-                        return route('filament.admin.resources.quiz-attempts.response', $record->attempt_id);
+                        $userQuizAttempt = UserQuizAttempt::where('user_id', $record->id)->where('attempt_id', $record->attempt_id)->first();
+                        return route('filament.admin.resources.quiz-attempts.response', $userQuizAttempt->id);
                     }
                 })
                 ->color('info')
