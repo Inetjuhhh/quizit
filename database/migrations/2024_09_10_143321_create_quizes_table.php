@@ -20,8 +20,6 @@ return new class extends Migration
                 ->constrained();
             $table->string('name');
             $table->string('description');
-            $table->datetime('starts_at');
-            $table->datetime('ends_at');
             $table->timestamps();
         });
     }

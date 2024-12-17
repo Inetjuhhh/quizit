@@ -29,7 +29,7 @@ class QuizResource extends Resource
     protected static ?string $modelLabel = 'Quiz';
 
     protected static ?string $pluralModelLabel = 'Quizes';
-    
+
     public static function getNavigationGroup(): ?string
     {
         return __('Beheer');
@@ -47,16 +47,7 @@ class QuizResource extends Resource
                     ->required(),
                 TextInput::make('description')
                     ->label('Beschrijving')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('starts_at')
-                    ->label('Start op')
-                    ->default(Date::now())
-                    ->required(),
-                Forms\Components\DateTimePicker::make('ends_at')
-                    ->label('Eindigt op')
-                    ->default(Date::now())
-                    ->required(),
-            ]);
+                    ->required(),            ]);
     }
 
     public static function table(Table $table): Table

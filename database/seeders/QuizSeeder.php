@@ -16,44 +16,31 @@ class QuizSeeder extends Seeder
             [
                 'author_id' => 1,
                 'name' => 'Quiz 1',
-                'description' => 'This is quiz 1',
-                'starts_at' => now(),
-                'ends_at' => now()->addDays(1),
-            ],
+                'description' => 'This is quiz 1',            ],
             [
                 'author_id' => 1,
                 'name' => 'Quiz 2',
                 'description' => 'This is quiz 2',
-                'starts_at' => now(),
-                'ends_at' => now()->addDays(1),
             ],
             [
                 'author_id' => 1,
                 'name' => 'Quiz 3',
                 'description' => 'This is quiz 3',
-                'starts_at' => now(),
-                'ends_at' => now()->addDays(1),
             ],
             [
                 'author_id' => 3,
                 'name' => 'Quiz 4',
                 'description' => 'This is quiz 4',
-                'starts_at' => now(),
-                'ends_at' => now()->addDays(1),
             ],
             [
                 'author_id' => 3,
                 'name' => 'Quiz 5',
                 'description' => 'This is quiz 5',
-                'starts_at' => now(),
-                'ends_at' => now()->addDays(1),
             ],
             [
                 'author_id' => 3,
                 'name' => 'Quiz 6',
                 'description' => 'This is quiz 6',
-                'starts_at' => now(),
-                'ends_at' => now()->addDays(1),
             ],
             
         ];

@@ -51,17 +51,12 @@ class QuestionResource extends Resource
                     ->label('Type vraag')
                     ->relationship('type', 'name')
                     ->live()
+                    ->required()
                     ->columnSpanFull()
                     ->options(
                         Type::all()->pluck('type', 'id')
                     ),
-
-                TextInput::make('question')
-                    ->label('Vraag')
-                    ->columnSpanFull()
-                    ->required(),
-
-                Select::make('categories')
+                    Select::make('categories')
                     ->label('Categorieën')
                     ->multiple()
                     ->preload()
@@ -76,6 +71,13 @@ class QuestionResource extends Resource
                                 ->label('Naam')
                                 ->required()
                 ]),
+
+                TextInput::make('question')
+                    ->label('Vraag')
+                    ->columnSpanFull()
+                    ->required(),
+
+
                 // TextInput::make('answer')
                 //     ->label('Antwoord')
                 //     ->columnSpanFull()

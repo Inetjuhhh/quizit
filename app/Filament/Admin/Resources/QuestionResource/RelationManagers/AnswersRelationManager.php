@@ -45,32 +45,9 @@ class AnswersRelationManager extends RelationManager
                     ->maxLength(255),
                 Forms\Components\Toggle::make('is_correct')
                     ->label('Is juist?')
-                    ->visible(function () {
-                        return in_array($this->ownerRecord->type_id, ['meerkeuze']);
-                    })
+                    ->default(true)
                 ]);
-            // ->rules([
-            //     'answer' => function ($attribute, $value, $fail) {
-            //         $question = $this->ownerRecord;
 
-            //         if ($question->type_id === 'open') {
-            //             $existingAnswers = \App\Models\Answer::where('question_id', $question->id)->count();
-            //             if ($existingAnswers >= 1) {
-            //                 $fail('Er mag slechts één antwoord bestaan voor een open vraag.');
-            //             }
-            //         }
-            //     },
-            // ]);
-            // ->beforeSave(function ($record) {
-            //     if ($record->type_id === 'open') {
-            //         $existingAnswerCount = \App\Models\Answer::where('question_id', $record->id)->count();
-            //         if ($existingAnswerCount >= 1) {
-            //             throw ValidationException::withMessages([
-            //                 'answer' => 'Er mag slechts één antwoord bestaan voor een open vraag.',
-            //             ]);
-            //         }
-            //     }
-            // });
     }
 
     public function table(Table $table): Table
@@ -83,6 +60,7 @@ class AnswersRelationManager extends RelationManager
                     ->label('Antwoord'),
                 Tables\Columns\IconColumn::make('is_correct')
                     ->label('Is juist?')
+                    ->default(true)
                     ->icon(function ($record) {
                         return $record->is_correct ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle';
                     })
