@@ -7,6 +7,7 @@ use App\Filament\Admin\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -38,8 +39,11 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Hidden::make('rol_id')
-                    ->default(2),
+                Select::make('rol_id')
+                    ->label('Rol')
+                    ->relationship('rol', 'naam')
+                    ->default('4')
+                    ->required(),
                 TextInput::make('name')
                     ->label('Naam')
                     ->required()
@@ -50,7 +54,10 @@ class UserResource extends Resource
                 TextInput::make('password')
                     ->label('Wachtwoord')
                     ->required()
-                    ->password()
+                    ->password(),
+                Select::make('klas_id')
+                    ->label('Klas')
+                    ->relationship('klas', 'name')
             ]);
     }
 
