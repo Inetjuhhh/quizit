@@ -11,6 +11,7 @@
                     <div class="flex justify-between align-center">
                         <h3 class="text-3xl my-5">{{$question->question}}</h3>
                         <div class="flex items-center space-x-4">
+                            <h4 class="italic">Beoordeel deze vraag:</h4>
                             {{-- @livewire('test-comp') --}}
                             @livewire('review-question', ['questionId' => $question->id], key($question->id))
                         </div>
