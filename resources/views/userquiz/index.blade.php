@@ -1,3 +1,9 @@
+@if (session('error'))
+    <script>
+        alert("{{ session('error') }}");
+    </script>
+@endif
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-5xl my-10">Uitgevoerde quizes</h1>

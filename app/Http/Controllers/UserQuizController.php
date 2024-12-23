@@ -37,60 +37,68 @@ class UserQuizController extends Controller
 
     public function checkQuestions(string $id, string $userQuizAttempt)
     {
-        $quiz = Quiz::with('questions.answers')->findOrFail($id);
         $userQuizAttempt = UserQuizAttempt::findOrFail($userQuizAttempt);
-        $questions = $quiz->questions;
-        $answers = request()->except('_token');
-
-        $score = 0;
-        $answerComplete = [];
-        $openAnswers = [];
-
-        if ($userQuizAttempt) {
-            $userQuizAttempt->completed_at = Carbon::now();
-            $userQuizAttempt->save();
+        if($userQuizAttempt->completed_at !== null){
+            return redirect()->route('userquizes.index' )->with('error', 'Deze quiz is al gemaakt. Toets kan niet opnieuw worden ingediend.');
         }
-        foreach($questions as $question) {
-            $submittedAnswerId = $answers[$question->id] ?? null;
+        else{
+            $quiz = Quiz::with('questions.answers')->findOrFail($id);
+            $questions = $quiz->questions;
+            $answers = request()->except('_token');
 
-            if($question->type->type == 'meerkeuze'){
-                $correctAnswer = $question->answers->firstWhere('is_correct', true);
+            $score = 0;
+            $answerComplete = [];
+            $openAnswers = [];
 
-                if($submittedAnswerId){
-                    $submittedAnswer = $question->answers->find($submittedAnswerId);
-                    $answerComplete[$question->id] = $submittedAnswer;
+            if ($userQuizAttempt) {
+                $userQuizAttempt->completed_at = Carbon::now();
+                $userQuizAttempt->save();
+            }
+            foreach($questions as $question) {
+                $submittedAnswerId = $answers[$question->id] ?? null;
 
-                    if($correctAnswer && $submittedAnswerId == $correctAnswer->id){
-                        $score++;
+                if($question->type->type == 'meerkeuze'){
+                    $correctAnswer = $question->answers->firstWhere('is_correct', true);
+
+                    if($submittedAnswerId){
+                        $submittedAnswer = $question->answers->find($submittedAnswerId);
+                        $answerComplete[$question->id] = $submittedAnswer;
+
+                        if($correctAnswer && $submittedAnswerId == $correctAnswer->id){
+                            $score++;
+                        }
+
+
+                        UserQuizResponse::updateOrCreate([
+                            'user_quiz_attempt_id' => $userQuizAttempt->id,
+                            'question_id' => $question->id,
+                            'answer_id' => $submittedAnswerId,
+                            'is_correct' => $submittedAnswerId == $correctAnswer->id,
+                        ]);
                     }
+                }
+                elseif($question->type->type == 'open'){
+                    $openAnswers[$question->id] = $answers[$question->id] ?? null;
 
                     UserQuizResponse::updateOrCreate([
                         'user_quiz_attempt_id' => $userQuizAttempt->id,
                         'question_id' => $question->id,
-                        'answer_id' => $submittedAnswerId,
-                        'is_correct' => $submittedAnswerId == $correctAnswer->id,
-                        'completed_at' => now(),
+                        'open_answer' => $answers[$question->id] ?? null,
                     ]);
+                    $openAnswers[$question->id] = $submittedAnswerId;
                 }
             }
-            elseif($question->type->type == 'open'){
-                $openAnswers[$question->id] = $answers[$question->id] ?? null;
+            UserQuizAttempt::updateOrCreate([
+                'id' => $userQuizAttempt->id,
+                'completed_at' => now(),
+            ]);
 
-                UserQuizResponse::updateOrCreate([
-                    'user_quiz_attempt_id' => $userQuizAttempt->id,
-                    'question_id' => $question->id,
-                    'open_answer' => $answers[$question->id] ?? null,
-                    'completed_at' => now(),
-                ]);
-                $openAnswers[$question->id] = $submittedAnswerId;
-            }
+            $totalQuestions = $questions->count();
+            $percentage = $totalQuestions > 0 ? round(($score / $totalQuestions) * 100, 1) : 0;
+
+            return redirect()->route('userquizes.index', [
+            ]);
         }
-
-        $totalQuestions = $questions->count();
-        $percentage = $totalQuestions > 0 ? round(($score / $totalQuestions) * 100, 1) : 0;
-
-        return redirect()->route('userquizes.index', [
-        ]);
     }
 
 
