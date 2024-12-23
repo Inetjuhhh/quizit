@@ -19,6 +19,9 @@ return new class extends Migration
                     ->on('users')
                     ->constrained();
             $table  ->string('question');
+            $table  ->integer('points');
+            $table  ->string('image')
+                    ->nullable();
             $table  ->timestamps();
         });
     }

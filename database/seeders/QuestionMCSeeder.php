@@ -16,12 +16,14 @@ class QuestionMCSeeder extends Seeder
         $categories = \App\Models\Category::all();
         $question = new \App\Models\Question();
         $question->question = 'What is the difference between == and ===?';
+        $question->points = 1;
         $question->type_id = 1;
         $question->created_by = 1;
         $question->save();
 
         $question = new \App\Models\Question();
         $question->question = 'Wie is de leukste collega?';
+        $question->points = 1;
         $question->type_id = 1;
         $question->created_by = 1;
         $question->save();
@@ -82,6 +84,7 @@ class QuestionMCSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             $question = new \App\Models\Question();
             $question->question = $faker->sentence();
+            $question->points = 1;
             $question->type_id = 1;
             $question->created_by = rand(1, (count($users)-1));
             $question->save();
@@ -117,6 +120,7 @@ class QuestionMCSeeder extends Seeder
 
         $question = new \App\Models\Question();
         $question->question = 'Wat is geen liedje van Nothing but thieves?';
+        $question->points = 1;
         $question->type_id = 1;
         $question->created_by = 1;
         $question->save();
@@ -147,6 +151,7 @@ class QuestionMCSeeder extends Seeder
 
         $question = new \App\Models\Question();
         $question->question = "Van wie is het liedje Shut up and dance?";
+        $question->points = 1;
         $question->type_id = 1;
         $question->created_by = 1;
         $question->save();

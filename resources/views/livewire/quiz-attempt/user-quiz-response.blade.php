@@ -15,6 +15,7 @@
                     <th scope="col" class="px-6 py-3">Vraag</th>
                     <th scope="col" class="px-6 py-3">Jouw Antwoord</th>
                     <th scope="col" class="px-6 py-3">Correcte antwoord</th>
+                    <th scope="col" class="px-6 py-3">#punten</th>
                     <th scope="col" class="px-6 py-3">Score</th>
                 </tr>
             </thead>
@@ -42,6 +43,7 @@
                                 }
                             ?>
                         </td>
+                        <td class="text-center">{{$response->question->points}}</td>
                         <td class="px-6 py-4">
 
                             @if($response->question->type->type !== 'meerkeuze')
@@ -56,11 +58,12 @@
                             />
                             @endif
                         </td>
-
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-
+    <div class="text-right">
+        <button onclick="location.reload()"  class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Resultaten opslaan</button>
+    </div>
 </div>

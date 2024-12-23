@@ -16,12 +16,14 @@ class QuestionOSeeder extends Seeder
         $faker = Fake('nl_NL');
         $question = new \App\Models\Question();
         $question->question = 'Beschrijf wat een border-bottom doet';
+        $question->points = 1;
         $question->type_id = 4;
         $question->created_by = 1;
         $question->save();
 
         $question = new \App\Models\Question();
         $question->question = 'Met welke value voeg ik een gestippelde rand toe?';
+        $question->points = 1;
         $question->type_id = 4;
         $question->created_by = 1;
         $question->save();
@@ -39,6 +41,7 @@ class QuestionOSeeder extends Seeder
         for($i = 15; $i < 25; $i++){
             $question = new \App\Models\Question();
             $question->question = $faker->sentence();
+            $question->points = 1;
             $question->type_id = 4;
             $question->created_by = 1;
             $question->save();
@@ -51,6 +54,7 @@ class QuestionOSeeder extends Seeder
 
         $question = new \App\Models\Question();
         $question->question = 'Door wie wordt het nummer Sweet Goodbyes gezongen?';
+        $question->points = 1;
         $question->type_id = 4;
         $question->created_by = 1;
         $question->save();
@@ -63,6 +67,7 @@ class QuestionOSeeder extends Seeder
 
         $question = new \App\Models\Question();
         $question->question = 'Door wie wordt het nummer Het regent zonnestralen gezongen?';
+        $question->points = 1;
         $question->type_id = 4;
         $question->created_by = 1;
         $question->save();
@@ -75,6 +80,7 @@ class QuestionOSeeder extends Seeder
 
         $question = new \App\Models\Question();
         $question->question = 'Door wie wordt het nummer Zij gelooft in mij gezongen?';
+        $question->points = 1;
         $question->type_id = 4;
         $question->created_by = 1;
         $question->save();
@@ -87,6 +93,7 @@ class QuestionOSeeder extends Seeder
 
         $question = new \App\Models\Question();
         $question->question = 'Door wie wordt het nummer Zij maakt het verschil gezongen?';
+        $question->points = 1;
         $question->type_id = 4;
         $question->created_by = 1;
         $question->save();
@@ -99,6 +106,7 @@ class QuestionOSeeder extends Seeder
 
         $question = new \App\Models\Question();
         $question->question = 'Noem een nummer van de band Sheppard';
+        $question->points = 1;
         $question->type_id = 4;
         $question->created_by = 1;
         $question->save();
