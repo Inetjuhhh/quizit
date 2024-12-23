@@ -28,9 +28,34 @@ class UserSeeder extends Seeder
         ]);
         $user = \App\Models\User::create([
             'name' => 'admin',
-            'email' => 'admin@test.nl',
+            'email' => 'admin@fiteducatie.nl',
             'password' => bcrypt('password'),
             'rol_id' => 2,
+        ]);
+
+        $user = \App\Models\User::create([
+            'name' => 'Ine',
+            'email' => 'ine@fitsoftware.nl',
+            'password' => bcrypt('password'),
+            'rol_id' => 3,
+        ]);
+        $user = \App\Models\User::create([
+            'name' => 'Fedde',
+            'email' => 'fedde@fitsoftware.nl',
+            'password' => bcrypt('password'),
+            'rol_id' => 3,
+        ]);
+        $user = \App\Models\User::create([
+            'name' => 'Tim',
+            'email' => 'tim@fitsoftware.nl',
+            'password' => bcrypt('password'),
+            'rol_id' => 3,
+        ]);
+        $user = \App\Models\User::create([
+            'name' => 'Bas',
+            'email' => 'bas.vermeer.mail@gmail.com',
+            'password' => bcrypt('password'),
+            'rol_id' => 3,
         ]);
 
         $klassen = \App\Models\Klas::all();

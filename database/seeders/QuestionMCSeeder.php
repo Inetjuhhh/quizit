@@ -115,6 +115,65 @@ class QuestionMCSeeder extends Seeder
             $userQuestionVote->save();
         }
 
+        $question = new \App\Models\Question();
+        $question->question = 'Wat is geen liedje van Nothing but thieves?';
+        $question->type_id = 1;
+        $question->created_by = 1;
+        $question->save();
+
+        $answer = new \App\Models\Answer();
+        $answer->question_id = 13;
+        $answer->answer = 'Amsterdam';
+        $answer->is_correct = true;
+        $answer->save();
+
+        $answer = new \App\Models\Answer();
+        $answer->question_id = 13;
+        $answer->answer = 'Sorry';
+        $answer->is_correct = false;
+        $answer->save();
+
+        $answer = new \App\Models\Answer();
+        $answer->question_id = 13;
+        $answer->answer = 'Impossible';
+        $answer->is_correct = false;
+        $answer->save();
+
+        $answer = new \App\Models\Answer();
+        $answer->question_id = 13;
+        $answer->answer = 'Overcome';
+        $answer->is_correct = false;
+        $answer->save();
+
+        $question = new \App\Models\Question();
+        $question->question = "Van wie is het liedje Shut up and dance?";
+        $question->type_id = 1;
+        $question->created_by = 1;
+        $question->save();
+
+        $answer = new \App\Models\Answer();
+        $answer->question_id = 14;
+        $answer->answer = 'Walk the moon';
+        $answer->is_correct = true;
+        $answer->save();
+
+        $answer = new \App\Models\Answer();
+        $answer->question_id = 14;
+        $answer->answer = 'Imagine dragons';
+        $answer->is_correct = false;
+        $answer->save();
+
+        $answer = new \App\Models\Answer();
+        $answer->question_id = 14;
+        $answer->answer = 'The killers';
+        $answer->is_correct = false;
+        $answer->save();
+
+        $answer = new \App\Models\Answer();
+        $answer->question_id = 14;
+        $answer->answer = 'The script';
+        $answer->is_correct = false;
+        $answer->save();
 
     }
 }

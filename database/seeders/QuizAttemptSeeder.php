@@ -29,5 +29,13 @@ class QuizAttemptSeeder extends Seeder
                 $quizAttempt->save();
             }
         }
+
+        $quizAttempt = new \App\Models\QuizAttempt();
+        $quizAttempt->quiz_id = 7;
+        $quizAttempt->prepared_by = 1;
+        $quizAttempt->starting_at = now()->subDays(10);
+        $quizAttempt->ending_at = now()->addDays(10);
+        $quizAttempt->status = 'pending';
+        $quizAttempt->save();
     }
 }

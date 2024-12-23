@@ -19,20 +19,51 @@ class UserQuizAttemptSeeder extends Seeder
         });
         $attempts = \App\Models\QuizAttempt::all();
 
-        foreach($usersNotAdmin as $user){
-            foreach($attempts as $attempt){
-                $rand = rand(0, 1);
-                if($rand === 0){
-                    continue;
-                }
-                else{
+        // foreach($usersNotAdmin as $user){
+        //     foreach($attempts as $attempt){
+        //         $rand = rand(0, 1);
+        //         if($rand === 0){
+        //             continue;
+        //         }
+        //         else{
 
-                    $userQuizAttempt = new \App\Models\UserQuizAttempt();
-                    $userQuizAttempt->user_id = $user->id;
-                    $userQuizAttempt->attempt_id = $attempt->id;
-                    $userQuizAttempt->save();
-                }
-            }
-        }
+        //             $userQuizAttempt = new \App\Models\UserQuizAttempt();
+        //             $userQuizAttempt->user_id = $user->id;
+        //             $userQuizAttempt->attempt_id = $attempt->id;
+        //             $userQuizAttempt->save();
+        //         }
+        //     }
+        // }
+
+        $userQuizAttempt = new \App\Models\UserQuizAttempt();
+        $userQuizAttempt->attempt_id = 5;
+        $userQuizAttempt->user_id = 1;
+        $userQuizAttempt->save();
+
+        $userQuizAttempt = new \App\Models\UserQuizAttempt();
+        $userQuizAttempt->attempt_id = 5;
+        $userQuizAttempt->user_id = 3;
+        $userQuizAttempt->completed_at = now();
+        $userQuizAttempt->save();
+
+        $userQuizAttempt = new \App\Models\UserQuizAttempt();
+        $userQuizAttempt->attempt_id = 5;
+        $userQuizAttempt->user_id = 4;
+        $userQuizAttempt->save();
+
+        $userQuizAttempt = new \App\Models\UserQuizAttempt();
+        $userQuizAttempt->attempt_id = 5;
+        $userQuizAttempt->user_id = 5;
+        $userQuizAttempt->save();
+
+        $userQuizAttempt = new \App\Models\UserQuizAttempt();
+        $userQuizAttempt->attempt_id = 5;
+        $userQuizAttempt->user_id = 6;
+        $userQuizAttempt->save();
+
+        $userQuizAttempt = new \App\Models\UserQuizAttempt();
+        $userQuizAttempt->attempt_id = 5;
+        $userQuizAttempt->user_id = 7;
+        $userQuizAttempt->save();
     }
 }

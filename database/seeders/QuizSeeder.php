@@ -42,7 +42,6 @@ class QuizSeeder extends Seeder
                 'name' => 'Quiz 6',
                 'description' => 'This is quiz 6',
             ],
-            
         ];
 
         foreach ($quizes as $quiz) {
@@ -61,5 +60,15 @@ class QuizSeeder extends Seeder
                 }
             }
         }
+        $quiz = new \App\Models\Quiz();
+        $quiz->author_id = 1;
+        $quiz->name = 'MuziekQuiz';
+        $quiz->description = 'Dit is een super leuke test muziekquiz';
+        $quiz->save();
+
+        //add question_id 13, 14, 25, 26, 27, 28, 29 to quiz_question_table
+        $quiz->questions()->attach([13, 14, 27, 28, 29, 30, 31]);
+
+
     }
 }
