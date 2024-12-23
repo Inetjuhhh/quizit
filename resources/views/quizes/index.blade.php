@@ -17,7 +17,7 @@
                             <!-- Quiz is completed -->
                             <td class="flex flex-row justify-between items-center">
                                 <h4 class="px-5 py-5 text-red-500 text-3xl">{{ $userQuizAttempt->attempt->quiz->name }}</h4>
-                                <a class="bg-amber-400 rounded text-gray-800 hover:bg-amber-600 p-4 mr-3" href="{{route('userquiz.index')}}">Ga naar uitgevoerde quiz</a>
+                                <a class="bg-amber-400 rounded text-gray-800 hover:bg-amber-600 p-4 mr-3" href="{{route('userquiz.result', $userQuizAttempt->id)}}">Ga naar uitgevoerde quiz</a>
                             </td>
                             <td class="px-5 py-5 text-red-500 border">
                                 Deze quiz is al gemaakt. <br>
