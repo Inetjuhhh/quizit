@@ -1,11 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
 
-        <div class="border-solid border-2 border-slate-300 rounded-lg p-10">
-            <h2 class="text-7xl my-5">{{$userQuizAttempt->attempt->quiz->name}}</h1>
+        <div class="border-solid border-2 border-slate-500 rounded-lg p-10 bg-slate-300">
+            <x-heading>
+                {{$userQuizAttempt->attempt->quiz->name}}
+            </x-heading>
             <p class="text-2xl my-5">{{$userQuizAttempt->attempt->quiz->description}}</p>
         </div>
-        <div class="border-solid border-2 border-slate-300 rounded-lg p-10 my-5 bg-slate-100">
+        <div class="border-solid border-2 border-slate-500 rounded-lg p-10 my-5 bg-slate-300">
             <h3 class="text-4xl my-5">Resultaten</h3>
             <ul>
                 <li class="my-5">
@@ -14,7 +16,7 @@
             </ul>
             <ul>
                 @foreach($userQuizResponses as $response)
-                <div class="border-solid border-2 border-slate-300 rounded-lg p-10 my-5 bg-slate-100">
+                <div class="border-solid border-2 border-slate-500 rounded-lg p-10 my-5 bg-slate-300">
                     <div class="flex flex-col align-center">
                         <h3 class="text-3xl my-5">{{ $response->question->question }}</h3>
                         <div class="flex justify-between items-center space-x-4">

@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-5xl my-10">Beschikbare quizes</h1>
-
+        <x-heading>
+            Beschikbare Quizes
+        </x-heading>
         <table class="table table-auto w-full border rounded-md text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 dark:bg-gray-50">
             <thead class="text-2xl text-gray-800 uppercase dark:text-gray-400 ">
                 <tr class="border-b">
@@ -16,7 +17,7 @@
                             <!-- Quiz is completed -->
                             <td class="flex flex-row justify-between items-center">
                                 <h4 class="px-5 py-5 text-red-500 text-3xl">{{ $userQuizAttempt->attempt->quiz->name }}</h4>
-                                <a class="bg-amber-400 rounded text-gray-800 p-4 mr-3" href="{{route('userquiz.index')}}">Ga naar uitgevoerde quiz</a>
+                                <a class="bg-amber-400 rounded text-gray-800 hover:bg-amber-600 p-4 mr-3" href="{{route('userquiz.index')}}">Ga naar uitgevoerde quiz</a>
                             </td>
                             <td class="px-5 py-5 text-red-500 border">
                                 Deze quiz is al gemaakt. <br>
