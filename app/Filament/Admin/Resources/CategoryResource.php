@@ -26,6 +26,8 @@ class CategoryResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Categorieën';
 
+    protected static ?int $navigationSort = 2;
+
     public static function getNavigationGroup(): ?string
     {
         return __('Beheer');

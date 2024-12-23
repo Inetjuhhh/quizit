@@ -36,6 +36,8 @@ class QuestionResource extends Resource
     protected static ?string $modelLabel = 'Vraag';
 
     protected static ?string $pluralModelLabel = 'Vragen';
+    
+    protected static ?int $navigationSort = 3;
 
     public static function getNavigationGroup(): ?string
     {
@@ -77,6 +79,11 @@ class QuestionResource extends Resource
                     ->columnSpanFull()
                     ->required(),
 
+                TextInput::make('points')
+                    ->label('Punten')
+                    ->columnSpan(1)
+                    ->default(1)
+                    ->required(),
 
                 // TextInput::make('answer')
                 //     ->label('Antwoord')

@@ -30,6 +30,8 @@ class QuizResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Quizes';
 
+    protected static ?int $navigationSort = 1;
+
     public static function getNavigationGroup(): ?string
     {
         return __('Beheer');

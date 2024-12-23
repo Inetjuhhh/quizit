@@ -30,6 +30,8 @@ class UserResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Gebruikers';
 
+    protected static ?int $navigationSort = 5;
+
     public static function getNavigationGroup(): ?string
     {
         return __('Beheer');
