@@ -24,7 +24,6 @@ class UserQuizController extends Controller
                 $numberOfQuestions = $userQuizAttempt->responses->count();
                 $percentage = $numberOfQuestions > 0 ? round(($correct / $numberOfQuestions) * 100, 1) : 0;
             }
-
         }
 
         return view('userquiz.index')
