@@ -3,7 +3,7 @@
         <h2 class="text-xl mb-3">Resultaten van {{$record->user->name}} voor {{$record->attempt->quiz->name}}</h2>
         @if($record->completed_at)
             <p class="italic">Quiz voltooid op {{$record->completed_at}}</p>
-            <span>Score: {{$record->responses->sum('is_correct')}} / {{count($record->responses)}}</span><span class="@if($record->responses->sum('is_correct')/count($record->responses) > 0.7) text-green-500 @endif"> ({{$record->responses->sum('is_correct')/count($record->responses) * 100}} %)</span>
+            <span>Score: {{$record->responses->sum('is_correct')}} / {{count($record->responses)}}</span><span class="@if($record->responses->sum('is_correct')/count($record->responses) > 0.7) text-green-500 @endif"> ({{round($record->responses->sum('is_correct')/count($record->responses) * 100, 1)}} %)</span>
         @else
             <p class="italic">Quiz nog niet voltooid</p>
         @endif
