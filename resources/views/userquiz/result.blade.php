@@ -5,7 +5,7 @@
             <x-heading>
                 {{$userQuizAttempt->attempt->quiz->name}}
             </x-heading>
-            <p class="text-2xl my-5">{{$userQuizAttempt->attempt->quiz->description}}</p>
+            <p class="text-2xl my-5 pl-5">{{$userQuizAttempt->attempt->quiz->description}}</p>
         </div>
         <div class="border-solid border-2 border-slate-500 rounded-lg p-10 my-5 bg-slate-300">
             <h3 class="text-4xl my-5">Resultaten</h3>

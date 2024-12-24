@@ -44,6 +44,12 @@ class UserResource extends Resource
                 Select::make('rol_id')
                     ->label('Rol')
                     ->relationship('rol', 'naam')
+                    ->options([
+                        '1' => 'Admin',
+                        '2' => 'Docent',
+                        '3' => 'Leerling',
+                        '4' => 'Ouder',
+                    ])
                     ->default('4')
                     ->required(),
                 TextInput::make('name')
