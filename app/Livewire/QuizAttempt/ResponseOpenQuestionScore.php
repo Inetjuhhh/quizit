@@ -7,7 +7,7 @@ use Livewire\Component;
 class ResponseOpenQuestionScore extends Component
 {
     public $response;
-    public $score = 0;
+    public $score = NULL;
 
     public function mount($response)
     {
