@@ -66,7 +66,6 @@ class QuizSeeder extends Seeder
         $quiz->description = 'Dit is een super leuke test muziekquiz';
         $quiz->save();
 
-        //add question_id 13, 14, 25, 26, 27, 28, 29 to quiz_question_table
         $quiz->questions()->attach([13, 14, 27, 28, 29, 30, 31]);
 
 

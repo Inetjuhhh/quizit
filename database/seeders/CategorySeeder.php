@@ -23,5 +23,17 @@ class CategorySeeder extends Seeder
         $category = new \App\Models\Category();
         $category->name = 'HTMLCSS';
         $category->save();
+
+        $category = new \App\Models\Category();
+        $category->name = 'Javascript';
+        $category->save();
+
+        $category = new \App\Models\Category();
+        $category->name = 'Python';
+        $category->save();
+
+        $category = new \App\Models\Category();
+        $category->name = 'Muziek';
+        $category->save();
     }
 }

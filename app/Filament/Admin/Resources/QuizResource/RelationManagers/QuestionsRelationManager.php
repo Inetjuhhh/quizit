@@ -42,7 +42,7 @@ class QuestionsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('question')
                     ->searchable()
                     ->label('Vraag'),
-                Tables\Columns\TextColumn::make('category.name')
+                Tables\Columns\TextColumn::make('categories.name')
                     ->label('Categorie')
                     ->searchable()
                     ->sortable(),

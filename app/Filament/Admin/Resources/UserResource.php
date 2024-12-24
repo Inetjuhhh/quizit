@@ -50,7 +50,7 @@ class UserResource extends Resource
                         '3' => 'Leerling',
                         '4' => 'Ouder',
                     ])
-                    ->default('4')
+                    ->default('3')
                     ->required(),
                 TextInput::make('name')
                     ->label('Naam')

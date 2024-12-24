@@ -40,7 +40,12 @@ class UserQuizController extends Controller
         if($userQuizAttempt->completed_at !== null){
             return redirect()->route('userquizes.index' )->with('error', 'Deze quiz is al gemaakt. Toets kan niet opnieuw worden ingediend.');
         }
+
+
         else{
+            $validated = request()->validate([
+                'question_id' => 'required',
+            ]);
             $quiz = Quiz::with('questions.answers')->findOrFail($id);
             $questions = $quiz->questions;
             $answers = request()->except('_token');
