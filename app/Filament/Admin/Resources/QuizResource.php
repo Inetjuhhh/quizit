@@ -44,6 +44,10 @@ class QuizResource extends Resource
             ->schema([
                 Hidden::make('author_id')
                     ->default(auth()->id()),
+                TextInput::make('course_id')
+                    ->label('Vak')
+                    ->columnSpanFull()
+                    ->required(),
                 TextInput::make('name')
                     ->label('Naam')
                     ->columnSpanFull()
@@ -51,7 +55,8 @@ class QuizResource extends Resource
                 TextInput::make('description')
                     ->label('Beschrijving')
                     ->columnSpanFull()
-                    ->required(),            ]);
+                    ->required(),
+                ]);
     }
 
     public static function table(Table $table): Table
@@ -60,13 +65,9 @@ class QuizResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->label('Name'),
-                TextColumn::make('starts_at')
-                    ->dateTime()
-                    ->label('Starts At'),
-                TextColumn::make('ends_at')
-                    ->dateTime()
-                    ->label('Ends At'),
-            ])
+                TextColumn::make('description')
+                    ->label('Description'),])
+
             ->filters([
                 //
             ])

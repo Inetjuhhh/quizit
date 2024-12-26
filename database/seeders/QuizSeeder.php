@@ -15,30 +15,36 @@ class QuizSeeder extends Seeder
         $quizes = [
             [
                 'author_id' => 1,
+                'course_id' => 1,
                 'name' => 'Quiz 1',
                 'description' => 'This is quiz 1',            ],
             [
                 'author_id' => 1,
+                'course_id' => 1,
                 'name' => 'Quiz 2',
                 'description' => 'This is quiz 2',
             ],
             [
                 'author_id' => 1,
+                'course_id' => 2,
                 'name' => 'Quiz 3',
                 'description' => 'This is quiz 3',
             ],
             [
                 'author_id' => 3,
+                'course_id' => 1,
                 'name' => 'Quiz 4',
                 'description' => 'This is quiz 4',
             ],
             [
                 'author_id' => 3,
+                'course_id' => 2,
                 'name' => 'Quiz 5',
                 'description' => 'This is quiz 5',
             ],
             [
                 'author_id' => 3,
+                'course_id' => 3,
                 'name' => 'Quiz 6',
                 'description' => 'This is quiz 6',
             ],
@@ -62,6 +68,7 @@ class QuizSeeder extends Seeder
         }
         $quiz = new \App\Models\Quiz();
         $quiz->author_id = 1;
+        $quiz->course_id = 1;
         $quiz->name = 'MuziekQuiz';
         $quiz->description = 'Dit is een super leuke test muziekquiz';
         $quiz->save();

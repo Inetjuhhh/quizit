@@ -18,6 +18,12 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->constrained();
+            $table
+                ->foreignId('course_id')
+                ->references('id')
+                ->on('courses')
+                ->nullable()
+                ->constrained();
             $table->string('name');
             $table->string('description');
             $table->timestamps();
