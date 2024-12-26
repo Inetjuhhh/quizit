@@ -46,9 +46,11 @@ class QuizResource extends Resource
                     ->default(auth()->id()),
                 TextInput::make('name')
                     ->label('Naam')
+                    ->columnSpanFull()
                     ->required(),
                 TextInput::make('description')
                     ->label('Beschrijving')
+                    ->columnSpanFull()
                     ->required(),            ]);
     }
 
