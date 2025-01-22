@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\QuizAttemptResource\Pages;
 use App\Filament\Admin\Resources\QuizAttemptResource\RelationManagers;
+use App\Models\Course;
 use App\Models\Quiz;
 use App\Models\QuizAttempt;
 use App\Models\User;
@@ -47,6 +48,15 @@ class QuizAttemptResource extends Resource
         return $form
             ->schema([
             Wizard::make([
+                Wizard\Step::make('course_id')
+                    ->label('Kies Les')
+                    ->schema([
+                        Select::make('course_id')
+                            ->label('Les')
+                            ->options(Course::all()->pluck('name', 'id'))
+                            ->required(),
+                    ]),
+
                 Wizard\Step::make('quiz_id')
                     ->label('Kies Quiz')
                     ->schema([
@@ -54,7 +64,10 @@ class QuizAttemptResource extends Resource
                             ->default(fn() => auth()->id()),
                         Select::make('quiz_id')
                             ->label('Quiz')
-                            ->options(Quiz::all()->pluck('name', 'id'))
+                            ->options(function(Get $get){
+                                $course_id = $get('course_id');
+                                return Quiz::where('course_id', $course_id)->get()->pluck('name', 'id');
+                            })
                             ->required(),
                     ]),
                 Wizard\Step::make('attendees')
