@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources;
 use App\Filament\Admin\Resources\QuizAttemptResource\Pages;
 use App\Filament\Admin\Resources\QuizAttemptResource\RelationManagers;
 use App\Models\Course;
+use App\Models\Klas;
 use App\Models\Quiz;
 use App\Models\QuizAttempt;
 use App\Models\User;
@@ -74,6 +75,18 @@ class QuizAttemptResource extends Resource
                                 })
                                 ->required(),
                         ]),
+                    Wizard\Step::make('klas')
+                        ->label('Klas')
+                        ->schema([
+                            Select::make('klas_id')
+                                ->label('Klas')
+                                ->options(Klas::all()->pluck('name', 'id'))
+                                ->reactive()
+                                ->afterStateUpdated(function ($state) {
+                                    $klasId = $state;
+                                })
+                                ->required(),
+                        ]),
                     Wizard\Step::make('attendees')
                         ->label('Deelnemers')
                         ->schema([
@@ -81,7 +94,10 @@ class QuizAttemptResource extends Resource
                                 ->multiple()
                                 ->relationship('users', 'name')
                                 ->label('Deelnemers')
-                                ->options(User::all()->pluck('name', 'id'))
+                                ->options(function(Get $get){
+                                    $klas_id = $get('klas_id');
+                                    return User::where('klas_id', $klas_id)->get()->pluck('name', 'id');
+                                })
                                 ->required()
                                     ,
                         ]),

@@ -18,6 +18,10 @@ class CreateQuizAttempt extends CreateRecord
             unset($data['course_id']);
         }
 
+        if(isset($data['klas_id'])){
+            unset($data['klas_id']);
+        }
+
         return QuizAttempt::create($data);
     }
 
