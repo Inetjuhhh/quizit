@@ -43,6 +43,7 @@ class QuizesRelationManager extends RelationManager
             ->headerActions([
                 Action::make('attachQuiz')
                     ->label('Quiz koppelen')
+                    ->modalSubmitActionLabel('Koppelen')
                     ->form([
                         Hidden::make('../../course_id')
                             ->default(request()->route('record')),

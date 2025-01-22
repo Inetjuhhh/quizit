@@ -12,4 +12,13 @@ class CreateQuizAttempt extends CreateRecord
 {
     protected static string $resource = QuizAttemptResource::class;
 
+    protected function handleRecordCreation(array $data): QuizAttempt
+    {
+        if(isset($data['course_id'])){
+            unset($data['course_id']);
+        }
+
+        return QuizAttempt::create($data);
+    }
+
 }

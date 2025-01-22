@@ -47,54 +47,58 @@ class QuizAttemptResource extends Resource
     {
         return $form
             ->schema([
-            Wizard::make([
-                Wizard\Step::make('course_id')
-                    ->label('Kies Les')
-                    ->schema([
-                        Select::make('course_id')
-                            ->label('Les')
-                            ->options(Course::all()->pluck('name', 'id'))
-                            ->required(),
-                    ]),
+                Wizard::make([
+                    Wizard\Step::make('course_selection')
+                        ->label('Kies Les')
+                        ->schema([
+                            Select::make('course_id')
+                                ->label('Les')
+                                ->options(Course::all()->pluck('name', 'id'))
+                                ->reactive()
+                                ->afterStateUpdated(function ($state) {
+                                    $courseId = $state;
+                                })
+                                ->required(),
+                        ]),
 
-                Wizard\Step::make('quiz_id')
-                    ->label('Kies Quiz')
-                    ->schema([
-                        Hidden::make('prepared_by')
-                            ->default(fn() => auth()->id()),
-                        Select::make('quiz_id')
-                            ->label('Quiz')
-                            ->options(function(Get $get){
-                                $course_id = $get('course_id');
-                                return Quiz::where('course_id', $course_id)->get()->pluck('name', 'id');
-                            })
-                            ->required(),
-                    ]),
-                Wizard\Step::make('attendees')
-                    ->label('Deelnemers')
-                    ->schema([
-                        Select::make('users')
-                            ->multiple()
-                            ->relationship('users', 'name')
-                            ->label('Deelnemers')
-                            ->options(User::all()->pluck('name', 'id'))
-                            ->required()
-                                ,
-                    ]),
-                Wizard\Step::make('period')
-                    ->label('Periode')
-                    ->schema([
-                        DateTimePicker::make('starting_at')
-                            ->label('Openen op')
-                            ->default(now())
-                            ->required(),
-                        DateTimePicker::make('ending_at')
-                            ->label('Sluiten op')
-                            ->default(now()->addDays(7))
-                            ->required(),
-                    ]),
-                ])
-        ]);
+                    Wizard\Step::make('quiz_id')
+                        ->label('Kies Quiz')
+                        ->schema([
+                            Hidden::make('prepared_by')
+                                ->default(fn() => auth()->id()),
+                            Select::make('quiz_id')
+                                ->label('Quiz')
+                                ->options(function(Get $get){
+                                    $course_id = $get('course_id');
+                                    return Quiz::where('course_id', $course_id)->get()->pluck('name', 'id');
+                                })
+                                ->required(),
+                        ]),
+                    Wizard\Step::make('attendees')
+                        ->label('Deelnemers')
+                        ->schema([
+                            Select::make('users')
+                                ->multiple()
+                                ->relationship('users', 'name')
+                                ->label('Deelnemers')
+                                ->options(User::all()->pluck('name', 'id'))
+                                ->required()
+                                    ,
+                        ]),
+                    Wizard\Step::make('period')
+                        ->label('Periode')
+                        ->schema([
+                            DateTimePicker::make('starting_at')
+                                ->label('Openen op')
+                                ->default(now())
+                                ->required(),
+                            DateTimePicker::make('ending_at')
+                                ->label('Sluiten op')
+                                ->default(now()->addDays(7))
+                                ->required(),
+                        ]),
+                    ])->columnSpanFull()
+            ]);
     }
 
     public static function table(Table $table): Table
