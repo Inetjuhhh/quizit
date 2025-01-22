@@ -43,9 +43,9 @@ class UserQuizController extends Controller
 
 
         else{
-            $validated = request()->validate([
-                'question_id' => 'required',
-            ]);
+            // $validated = request()->validate([
+            //     'question_id' => 'required',
+            // ]);
             $quiz = Quiz::with('questions.answers')->findOrFail($id);
             $questions = $quiz->questions;
             $answers = request()->except('_token');

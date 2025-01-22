@@ -2,6 +2,8 @@
 
 namespace App\Filament\Admin\Actions;
 
+use App\Filament\Admin\Resources\QuizAttemptResource\RelationManagers\UsersRelationManager;
+use App\Models\Quiz;
 use App\Models\UserQuizAttempt;
 use App\Models\UserQuizResponse;
 use Filament\Actions\Concerns\CanCustomizeProcess;
@@ -43,18 +45,33 @@ class DetachActionBelongsTo extends Action
         $this->action(function (): void {
             $this->process(function (Model $record, Table $table): void {
 
-                $quizAttemptId = $record->attempt_id;
+                $queryStringIdentifier = $table->getQueryStringIdentifier();
                 $user = $record->id;
-                $userQuizAttempt = UserQuizAttempt::query()
-                    ->where('attempt_id', $quizAttemptId)
-                    ->where('user_id', $user)
-                    ->first();
 
-                if(UserQuizResponse::query()->where('user_quiz_attempt_id', $userQuizAttempt->id)->exists()){
-                    $this->notify(__('Toets al uitgevoerd, kan niet worden verwijderd'));
-                    return;
-                }
-                $userQuizAttempt->delete();
+                switch($queryStringIdentifier){
+                    case 'usersRelationManager':
+                        $quizAttemptId = $record->attempt_id;
+                        $userQuizAttempt = UserQuizAttempt::query()
+                            ->where('attempt_id', $quizAttemptId)
+                            ->where('user_id', $user)
+                            ->first();
+
+                        if(UserQuizResponse::query()->where('user_quiz_attempt_id', $userQuizAttempt->id)->exists()){
+                            $this->notify(__('Toets al uitgevoerd, kan niet worden verwijderd'));
+                            return;
+                        }
+                        $userQuizAttempt->delete();
+                    case 'quizesRelationManager':
+                        $courseId = $record->course_id;
+                        $quiz = Quiz::query()
+                            ->where('course_id', $courseId)
+                            ->where('id', $record->id)
+                            ->first();
+
+                        $quiz->course_id = NULL;
+                        $quiz->save();
+                    }
+
             });
         });
 

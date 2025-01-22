@@ -20,9 +20,9 @@ return new class extends Migration
                 ->constrained();
             $table
                 ->foreignId('course_id')
+                ->nullable()
                 ->references('id')
                 ->on('courses')
-                ->nullable()
                 ->constrained();
             $table->string('name');
             $table->string('description');
